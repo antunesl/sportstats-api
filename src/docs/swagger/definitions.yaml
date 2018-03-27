@@ -1,0 +1,81 @@
+definitions:
+  Competition:
+    type: object
+    required:
+      - id
+      - countryId
+      - code
+    properties:
+      id:
+        type: number
+      code:
+        type: string
+      countryId:
+        type: number
+      teams:
+        type: array
+  Provider:
+    type: object
+    required:
+      - provider
+      - link
+    properties:
+      provider:
+          type: string
+      link:
+          type: string
+
+  LeagueInfo:
+    type: object
+    required:
+      - provider
+      - link
+    properties:
+      name:
+          type: string
+      permalink:
+          type: string
+      country:
+          type: string
+      titleHolder:
+          type: string
+      mostTitlesNumber:
+          type: number
+
+  LeagueToScrap:
+    type: object
+    required:
+      - permalink
+      - name
+      - country
+      - providers
+    properties:
+      permalink:
+        type: string
+      name:
+        type: string
+      country:
+        type: string
+      providers:
+        type: array
+        items:
+            $ref: '#/definitions/Provider'
+
+  TeamToScrap:
+    type: object
+    required:
+      - permalink
+      - name
+      - country
+      - providers
+    properties:
+      permalink:
+        type: string
+      name:
+        type: string
+      country:
+        type: string
+      providers:
+        type: array
+        items:
+            $ref: '#/definitions/Provider'

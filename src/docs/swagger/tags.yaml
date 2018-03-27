@@ -1,0 +1,15 @@
+tags:
+- name: "Countries"
+  description: ""
+
+- name: "Leagues"
+  description: ""
+
+- name: "Teams"
+  description: ""
+
+- name: "Auth"
+  description: ""
+
+schemes:
+- "http"

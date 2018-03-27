@@ -1,0 +1,35 @@
+{
+  "name": "sportstats.api",
+  "version": "1.0.0",
+  "description": "Sportstats API Server",
+  "main": "Api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon Api.js",
+    "debug": "nodemon --inspect Api.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "nodemonConfig": {
+    "verbose": true
+  },
+  "dependencies": {
+    "@meanie/mongoose-upsert-many": "^1.4.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "debug": "^3.1.0",
+    "express": "^4.16.2",
+    "express-metrics": "^1.1.0",
+    "jsonwebtoken": "^8.2.0",
+    "mongoose": "^5.0.7",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.17.1",
+    "request": "^2.83.0",
+    "swagger-jsdoc": "^1.9.7",
+    "swagger-ui-express": "^2.0.15",
+    "winston": "^3.0.0-rc1"
+  }
+}
