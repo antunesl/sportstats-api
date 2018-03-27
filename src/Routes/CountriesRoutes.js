@@ -1,6 +1,6 @@
 'use strict';
 const settings = require('../settings');
-const CountriesController = require('../Controllers/countriesController')
+const CountriesController = require('../Controllers/CountriesController')
 
 module.exports = function (app) {
     var countriesRoutePrefix = 'countries';
