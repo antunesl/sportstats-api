@@ -42,6 +42,8 @@ var TeamInfo = new Schema({
     nextGame: {
         homeTeam: String,
         awayTeam: String,
+        homeTeamLink: String,
+        awayTeamLink: String,
         homeLineup: Array,
         awayLineup: Array,
         homeNews: Array,

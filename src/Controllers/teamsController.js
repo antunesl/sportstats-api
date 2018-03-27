@@ -72,7 +72,7 @@ class TeamsController extends BaseController {
                     var doc = responseModel.successResponse(result.docs[0]);
 
                     var name = 'nextGame';
-                    doc.result[name] = {"awayLineup":[{"left":"","name":"Scott Wootton","position":"DC","right":"30.3636px","top":"174.5px"},{"left":"","name":"Scott Wootton","position":"DC","right":"91.0909px","top":"241.591px"},{"left":"","name":"Scott Wootton","position":"DC","right":"91.0909px","top":"174.5px"},{"left":"","name":"Scott Wootton","position":"DC","right":"91.0909px","top":"107.409px"},{"left":"","name":"Scott Wootton","position":"DC","right":"182.182px","top":"308.682px"},{"left":"","name":"Scott Wootton","position":"DC","right":"182.182px","top":"241.591px"},{"left":"","name":"Scott Wootton","position":"DC","right":"182.182px","top":"174.5px"},{"left":"","name":"Scott Wootton","position":"DC","right":"182.182px","top":"107.409px"},{"left":"","name":"Scott Wootton","position":"DC","right":"182.182px","top":"40.3182px"},{"left":"","name":"Scott Wootton","position":"DC","right":"273.273px","top":"208.045px"},{"left":"","name":"Scott Wootton","position":"DC","right":"273.273px","top":"140.955px"}],"awayNews":[{"text":"Blackpool defender Kelvin Mellor missed Saturday's 1-1 draw with Southend and remains a doubt here, meaning Curtis Tilt should continue at centre-back for the hosts."},{"text":"Mark Cullen and Jim McAlister will once again miss out for the away side."}],"awayTeam":"Blackpool","homeLineup":[{"left":"30.3636px","name":"Scott Wootton","position":"DC","right":"","top":"174.5px"},{"left":"91.0909px","name":"Scott Wootton","position":"DC","right":"","top":"107.409px"},{"left":"91.0909px","name":"Scott Wootton","position":"DC","right":"","top":"174.5px"},{"left":"91.0909px","name":"Scott Wootton","position":"DC","right":"","top":"241.591px"},{"left":"182.182px","name":"Scott Wootton","position":"DC","right":"","top":"73.8636px"},{"left":"182.182px","name":"Scott Wootton","position":"DC","right":"","top":"140.955px"},{"left":"182.182px","name":"Scott Wootton","position":"DC","right":"","top":"208.045px"},{"left":"182.182px","name":"Scott Wootton","position":"DC","right":"","top":"275.136px"},{"left":"273.273px","name":"Scott Wootton","position":"DC","right":"","top":"107.409px"},{"left":"273.273px","name":"Scott Wootton","position":"DC","right":"","top":"174.5px"},{"left":"273.273px","name":"Scott Wootton","position":"DC","right":"","top":"241.591px"}],"homeNews":[{"text":"On-loan Middlesborough midfielder Marcus Tavernier remains a doubt for the Dons after missing the win over Bury at the weekend."}],"homeTeam":"Milton Keynes Dons","missingAwayPlayers":[{"name":"Kelvin Mellor","reason":"injured doubtful","status":"Doubtful"},{"name":"Mark Cullen","reason":"injured doubtful","status":"Doubtful"},{"name":"Jim McAlister","reason":"injured doubtful","status":"Doubtful"}],"missingHomePlayers":[{"name":"Alex Gilbey","reason":"injured","status":"Out"},{"name":"Joe Walsh","reason":"injured","status":"Out"},{"name":"Marcus Tavernier","reason":"injured doubtful","status":"Doubtful"}]};
+                    doc.result[name] = { "awayLineup": [{ "left": "", "name": "Scott Wootton", "position": "DC", "right": "30.3636px", "top": "174.5px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "91.0909px", "top": "241.591px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "91.0909px", "top": "174.5px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "91.0909px", "top": "107.409px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "182.182px", "top": "308.682px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "182.182px", "top": "241.591px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "182.182px", "top": "174.5px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "182.182px", "top": "107.409px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "182.182px", "top": "40.3182px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "273.273px", "top": "208.045px" }, { "left": "", "name": "Scott Wootton", "position": "DC", "right": "273.273px", "top": "140.955px" }], "awayNews": [{ "text": "Blackpool defender Kelvin Mellor missed Saturday's 1-1 draw with Southend and remains a doubt here, meaning Curtis Tilt should continue at centre-back for the hosts." }, { "text": "Mark Cullen and Jim McAlister will once again miss out for the away side." }], "awayTeam": "Blackpool", "homeLineup": [{ "left": "30.3636px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "174.5px" }, { "left": "91.0909px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "107.409px" }, { "left": "91.0909px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "174.5px" }, { "left": "91.0909px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "241.591px" }, { "left": "182.182px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "73.8636px" }, { "left": "182.182px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "140.955px" }, { "left": "182.182px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "208.045px" }, { "left": "182.182px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "275.136px" }, { "left": "273.273px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "107.409px" }, { "left": "273.273px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "174.5px" }, { "left": "273.273px", "name": "Scott Wootton", "position": "DC", "right": "", "top": "241.591px" }], "homeNews": [{ "text": "On-loan Middlesborough midfielder Marcus Tavernier remains a doubt for the Dons after missing the win over Bury at the weekend." }], "homeTeam": "Milton Keynes Dons", "missingAwayPlayers": [{ "name": "Kelvin Mellor", "reason": "injured doubtful", "status": "Doubtful" }, { "name": "Mark Cullen", "reason": "injured doubtful", "status": "Doubtful" }, { "name": "Jim McAlister", "reason": "injured doubtful", "status": "Doubtful" }], "missingHomePlayers": [{ "name": "Alex Gilbey", "reason": "injured", "status": "Out" }, { "name": "Joe Walsh", "reason": "injured", "status": "Out" }, { "name": "Marcus Tavernier", "reason": "injured doubtful", "status": "Doubtful" }] };
 
                     return res.json(doc);
                 }
@@ -173,10 +173,109 @@ class TeamsController extends BaseController {
                 };
                 data.docs.forEach(doc => {
                     if (doc.nextGame)
-                    resultObj.docs.push({ team: doc.permalink, nextGame: doc.nextGame });
+                        resultObj.docs.push({ team: doc.permalink, nextGame: doc.nextGame });
                 });
                 return res.json(responseModel.successResponse(resultObj));
             });
+    }
+
+
+
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
+    get_pending_games_preview_to_scrap(req, res) {
+        var objs = [{
+            away: "Blackpool",
+            home: "Milton Keynes Dons",
+            link: "/Matches/1193046/Preview/England-League-1-2017-2018-Milton-Keynes-Dons-Blackpool"
+        }];
+
+
+    }
+
+
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
+    save_game_preview_scrap_info(req, res) {
+        // recebe array  de:
+        var data = {
+            homeTeamPermalink: '',
+            awayTeamPermalink: '',
+            homeTeam: $('div.match-header > table > tbody > tr > td.team')[0].innerText,
+            awayTeam: $('div.match-header > table > tbody > tr > td.team')[1].innerText,
+            homeLineup: homeLineup,
+            awayLineup: awayLineup,
+            homeNews: homeNews,
+            awayNews: awayNews,
+            missingHomePlayers: missingHomePlayers,
+            missingAwayPlayers: missingAwayPlayers
+        };
+
+        var previewsData = req.body;
+        var ids = [];
+        logger.info('Saving ' + previewsData.length + ' previews:');
+        previewsData.forEach(preview => {
+            if (!preview.homeTeamPermalink || !preview.awayTeamPermalink) {
+                logger.info(' » A preview has no required data! (skip item)');
+            } else {
+                ids.push(preview.homeTeamPermalink);
+                ids.push(preview.awayTeamPermalink);
+                logger.info(' » ' + preview.homeTeam + ' vs ' + preview.awayTeam);
+            }
+        });
+
+        TeamInfo.find({
+            permalink: {
+                $in: ids
+            }
+        }, function (err, dbTeamInfo) {
+            if (err) {
+                logger.error(err);
+                return res.status(500).json(response.errorResponse(err));
+            }
+
+            logger.info('Got ' + dbTeamInfo.length + ' Teams from db');
+            if (dbTeamInfo.length == 0) {
+                logger.info('Nothing to do...returning "204 No Content".');
+                return res.status(204).json(response.errorResponse('Found no teams to update.'));
+            }
+
+            // UPDATE NextGame
+            dbTeamInfo.forEach(teamInfo => {
+                var newArray = teamsData.filter(function (el) {
+                    return el.permalink == teamInfo.permalink;
+                });
+
+                if (newArray.length > 0) {
+                    teamInfo.updatedAt = new Date();
+                    teamInfo.nextGame = {
+                        homeTeam: newArray[0].homeTeam,
+                        awayTeam: newArray[0].awayTeam,
+                        homeLineup: newArray[0].homeLineup,
+                        awayLineup: newArray[0].awayLineup,
+                        homeNews: newArray[0].homeNews,
+                        awayNews: newArray[0].awayNews,
+                        missingHomePlayers: newArray[0].missingHomePlayers,
+                        missingAwayPlayers: newArray[0].missingAwayPlayers
+                    };
+                    console.log('Setting NextGame for ' + teamInfo.name + ': ' + teamInfo.nextGame.homeTeam+ ' vs ' + teamInfo.nextGame.awayTeam);
+                }
+            });
+
+            const matchFields = ['permalink'];
+
+
+            var result2 = TeamInfo.upsertMany(dbTeamInfo, matchFields);
+            logger.info('Team info data succesfully saved for ' + dbTeamInfo.length + ' teams.');
+
+            return res.json(responseModel.successResponse());
+        });
     }
 
 
@@ -865,6 +964,7 @@ class TeamsController extends BaseController {
                 if (nextGameArray.length > 0) {
                     console.log('1 - NextGameScrapDate for ' + teamInfo.name);
                     var name = 'nextGameScrapAt';
+                    teamInfo.nextGameScrapAt = nextGameArray[0].date;
                     teamInfo[name] = new Date();
                     teamInfo.nextGame = {
                         date: nextGameArray[0].date,
@@ -887,14 +987,6 @@ class TeamsController extends BaseController {
 
             var result3 = TeamsToScrap.upsertMany(dbTeamsToScrap, matchFields);
             logger.info('Updated TeamsToScrap info with nextScrapAt.');
-
-
-
-
-
-
-
-
 
             return res.json(responseModel.successResponse());
         });

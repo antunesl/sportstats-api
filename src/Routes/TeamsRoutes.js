@@ -89,7 +89,7 @@ module.exports = function (app) {
       */
     app.route(`/${settings.api.apiBasePath}/${teamsRoutePrefix}/scrap/pending`)
         .get(teamsCtrl.get_pending_teams_to_scrap);
-     
+
     app.route(`/${settings.api.apiBasePath}/${teamsRoutePrefix}/games/scrap/pending`)
         .get(teamsCtrl.get_pending_team_games_to_scrap);
 
@@ -111,6 +111,18 @@ module.exports = function (app) {
      */
     app.route(`/${settings.api.apiBasePath}/${teamsRoutePrefix}/scrap/reset`)
         .post(teamsCtrl.reset_teams_to_scrap);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -149,4 +161,43 @@ module.exports = function (app) {
      */
     app.route(`/${settings.api.apiBasePath}/${teamsRoutePrefix}/games/scrap`)
         .post(teamsCtrl.save_team_game_scrap_info);
+
+
+
+
+    /**
+    * @swagger
+    * /teams/previews/scrap/pending:
+    *   get:
+    *     tags:
+    *       - "Teams"
+    *     description: Returns a list of previews that are pending to be scraped.
+    *     produces:
+    *      - application/json
+    *     responses:
+    *       200:
+    *         description: previews
+    *         schema:
+    *           type: array
+    */
+    app.route(`/${settings.api.apiBasePath}/${teamsRoutePrefix}/previews/scrap/pending`)
+        .get(teamsCtrl.get_pending_games_preview_to_scrap);
+
+    /**
+     * @swagger
+     * /teams/previews/scrap:
+     *   post:
+     *     tags:
+     *       - "Teams"
+     *     description: Saves game preview scraped information for a list of games.
+     *     produces:
+     *      - application/json
+     *     responses:
+     *       200:
+     *         description: result
+     *         schema:
+     *           type: object
+     */
+    app.route(`/${settings.api.apiBasePath}/${teamsRoutePrefix}/previews/scrap`)
+        .post(teamsCtrl.save_game_preview_scrap_info);
 };

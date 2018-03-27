@@ -1,6 +1,6 @@
 var settings = {
     api: {
-        hostUrl: 'localhost:3000',
+        hostUrl: 'localhost:3010',
         apiVersion: 'v1',
         apiBasePath: 'api',
 
@@ -20,14 +20,18 @@ var settings = {
             teamsScrapInfo: {
                 routePrefix: 'teamsScrapInfo'
             },
+            gamesScrapInfo: {
+                routePrefix: 'gamesScrapInfo'
+            },
         }
     },
     mongo: {
-        authEnabled: true,
+        authEnabled: false,
         connStringUserTag: '{user}',
         connStringPasswordTag: '{password}',
-        connString: 'mongodb://{user}:{password}@localhost:27017/admin'
-        //connString: 'mongodb://localhost:27017/sportstats'
+        //connString: 'mongodb://{user}:{password}@localhost:27017/admin'
+        // connString: 'mongodb://localhost:27017/sportstats'
+        connString: 'mongodb://sportstatsdbAdmin:sportstatsWIG@server/sportstats'
     },
     scraping: {
         providers: [
