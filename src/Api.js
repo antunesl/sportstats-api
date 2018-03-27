@@ -36,6 +36,9 @@ var autoIncrement = require('mongoose-auto-increment');
 var mongoConnString = `${settings.mongo.connString}`;
 if(settings.mongo.authEnabled)
 {
+    console.log(JSON.stringify(process.env));
+    console.log(process.env.MONGO_USER);
+    console.log(process.env.MONGO_PWD);
     mongoConnString = mongoConnString.replace(settings.mongo.connStringUserTag, process.env.MONGO_USER);
     mongoConnString = mongoConnString.replace(settings.mongo.connStringPasswordTag, process.env.MONGO_PWD);
 }
