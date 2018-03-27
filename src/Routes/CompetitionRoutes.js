@@ -8,7 +8,7 @@ module.exports = function (app) {
 
 
     /**
-     * @swagger
+     * swagger
      * /competitions:
      *   get:
      *     tags:
@@ -27,7 +27,7 @@ module.exports = function (app) {
 
 
     /**
-     * @swagger
+     * swagger
      * /competitions/{id}:
      *   get:
      *     tags:
@@ -52,7 +52,7 @@ module.exports = function (app) {
 
 
     /**
-     * @swagger
+     * swagger
      * /competitions:
      *   post:
      *     tags:
