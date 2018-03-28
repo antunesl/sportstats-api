@@ -51,7 +51,8 @@ var TeamInfo = new Schema({
         homeNews: Array,
         awayNews: Array,
         missingHomePlayers: Array,
-        missingAwayPlayers: Array
+        missingAwayPlayers: Array,
+        previewLink: String
     },
 
     createdAt: {
