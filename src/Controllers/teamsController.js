@@ -146,7 +146,7 @@ class TeamsController extends BaseController {
 
         var now = new Date();
         var filter = {
-            // hasPreview: false
+            hasPreview: false
         };
 
         var options = {
@@ -156,7 +156,7 @@ class TeamsController extends BaseController {
 
 
 
-        TeamsToScrap.paginate(
+        TeamInfo.paginate(
             filter,
             options,
             function (err, data) {
