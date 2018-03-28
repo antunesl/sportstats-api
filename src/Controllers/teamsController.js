@@ -199,11 +199,7 @@ class TeamsController extends BaseController {
         };
 
         TeamInfo.find({
-            nextGame: {
-                previewLink: {
-                    "$exists": true
-                }
-            }
+            hasPreview: true
         },
             options,
             function (err, dbTeams) {
@@ -211,7 +207,7 @@ class TeamsController extends BaseController {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
-                
+
                 logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
                 var result = [];
@@ -1463,6 +1459,9 @@ class TeamsController extends BaseController {
                     });
 
                     if (newArray.length > 0) {
+                        team.previewLink = newArray[0].link;
+                        team.hasPreview = newArray[0].link;
+
                         team.nextGame.previewLink = newArray[0].link;
                         logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
                         updateRows.push(team);

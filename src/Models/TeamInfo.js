@@ -55,6 +55,10 @@ var TeamInfo = new Schema({
         previewLink: String
     },
 
+    previewLink: String,
+
+    hasPreview: Boolean,
+
     createdAt: {
         type: Date,
         default: Date.now
