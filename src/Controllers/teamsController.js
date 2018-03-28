@@ -146,20 +146,14 @@ class TeamsController extends BaseController {
 
         var now = new Date();
         var filter = {
-            nextGame: {
-                previewLink: {
-                    "$exists": false,
-                    "$type": 10
-                }
+            previewLink: {
+                "$exists": false
             }
         };
 
         var options = {
             page: 1,
-            limit: 1,
-            sort: {
-                createdAt: -1
-            }
+            limit: 1
         };
 
 
@@ -172,6 +166,8 @@ class TeamsController extends BaseController {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
+
+                logger.info('» Items: ' + data.docs.length);
 
                 var resultObj = {
                     docs: []
