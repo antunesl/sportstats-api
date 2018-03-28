@@ -146,7 +146,7 @@ class TeamsController extends BaseController {
 
         var now = new Date();
         var filter = {
-            hasPreview: false
+            // hasPreview: false
         };
 
         var options = {
@@ -167,10 +167,18 @@ class TeamsController extends BaseController {
 
                 logger.info('» Items: ' + data.docs.length);
 
+                var docs = [];
+                data.docs.forEach(doc => {
+                    if (!doc.hasPreview)
+                        docs.push(doc);
+                });
+
+                logger.info('» Filtered Items: ' + docs.length);
+
                 var resultObj = {
                     docs: []
                 };
-                data.docs.forEach(doc => {
+                docs.forEach(doc => {
                     if (doc.nextGame)
                         resultObj.docs.push({ team: doc.permalink, nextGame: doc.nextGame });
                 });
