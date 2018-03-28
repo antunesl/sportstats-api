@@ -146,7 +146,12 @@ class TeamsController extends BaseController {
 
         var now = new Date();
         var filter = {
-            nextGameScrapAt: { "$lte": now }
+            nextGame: {
+                previewLink: {
+                    "$exists": false,
+                    "$type": 10
+                }
+            }
         };
 
         var options = {
@@ -187,7 +192,7 @@ class TeamsController extends BaseController {
      * @param {*} res 
      */
     get_pending_games_preview_to_scrap(req, res) {
-        
+
         var options = {
             page: 1,
             limit: 1,
@@ -199,8 +204,8 @@ class TeamsController extends BaseController {
         TeamInfo.find({
             nextGame: {
                 previewLink: {
-                    $exists: true,
-                    $ne: null
+                    "$exists": true,
+                    "$ne": null
                 }
 
             }
