@@ -164,11 +164,12 @@ class TeamsController extends BaseController {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
-
+                logger.info(JSON.stringify(data));
                 logger.info('» Items: ' + data.docs.length);
 
                 var docs = [];
                 data.docs.forEach(doc => {
+                    logger
                     logger.info('hasPreview: ' + doc.hasPreview);
                     if (doc.hasPreview == false)
                         docs.push(doc);
