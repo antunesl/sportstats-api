@@ -199,12 +199,9 @@ class TeamsController extends BaseController {
         };
 
         TeamInfo.find({
-            nextGame: {
-                previewLink: {
+            "nextGame.previewLink": {
                     "$exists": true,
                     "$ne": null
-                }
-
             }
         },
             options,
