@@ -310,37 +310,443 @@ class TeamsController extends BaseController {
     save_team_scrap_info(req, res) {
 
         var dicionario = [{
+
             sofaProviderName: 'SofaScore',
+        
             sofaTeamId: '17',
+        
             sofaTeamName: 'Manchester City',
+        
             sofaTeamLink: 'https://www.sofascore.com/team/football/manchester-city/17',
-
+        
+        
             whoScoredProviderName: 'WhoScored',
+        
             whoTeamId: '167',
+        
             whoTeamName: 'Manchester City',
+        
             whoTeamLink: 'https://www.whoscored.com/Teams/167/Show/England-Manchester-City',
+        
         },
+        
+        
         {
+        
             sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '35',
+        
+            sofaTeamName: 'Manchester United',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/manchester-united/35',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '32',
+        
+            whoTeamName: 'Manchester United',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/32/Show/England-Manchester-United',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '44',
+        
+            sofaTeamName: 'Liverpool',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/liverpool/44',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '26',
+        
+            whoTeamName: 'Liverpool',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/26/Show/England-Liverpool',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '33',
+        
+            sofaTeamName: 'Tottenham Hotspur',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/tottenham-hotspur/33',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '30',
+        
+            whoTeamName: 'Tottenham',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/30/Show/England-Tottenham',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '38',
+        
+            sofaTeamName: 'Chelsea',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/chelsea/38',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '15',
+        
+            whoTeamName: 'Chelsea',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/15/Show/England-Chelsea',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '42',
+        
+            sofaTeamName: 'Arsenal',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/arsenal/42',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '13',
+        
+            whoTeamName: 'Arsenal',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/13/Show/England-Arsenal',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '6',
+        
+            sofaTeamName: 'Burnley',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/burnley/6',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '184',
+        
+            whoTeamName: 'Burnley',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/184/Show/England-Burnley',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '31',
+        
+            sofaTeamName: 'Leicester City',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/leicester-city/31',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '14',
+        
+            whoTeamName: 'Leicester',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/14/Show/England-Leicester',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
             sofaTeamId: '48',
+        
             sofaTeamName: 'Everton',
+        
             sofaTeamLink: 'https://www.sofascore.com/team/football/everton/48',
-
+        
+        
             whoScoredProviderName: 'WhoScored',
-            whoTeamId: '34',
+        
+            whoTeamId: '31',
+        
             whoTeamName: 'Everton',
+        
             whoTeamLink: 'https://www.whoscored.com/Teams/31/Show/England-Everton',
+        
         },
+        
+        
         {
+        
             sofaProviderName: 'SofaScore',
-            sofaTeamId: '29',
-            sofaTeamName: 'Stoke City',
-            sofaTeamLink: 'https://www.sofascore.com/team/football/stoke-city/29',
-
+        
+            sofaTeamId: '60',
+        
+            sofaTeamName: 'Bournemouth',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/bournemouth/60',
+        
+        
             whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '183',
+        
+            whoTeamName: 'Bournemouth',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/183/Show/England-Bournemouth',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '24',
+        
+            sofaTeamName: 'Watford',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/watford/24',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '27',
+        
+            whoTeamName: 'Watford',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/27/Show/England-Watford',
+        
+        },
+        
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '30',
+        
+            sofaTeamName: 'Brighton & Hove Albion',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/brighton-hove-albion/30',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '211',
+        
+            whoTeamName: 'Brighton',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/211/Show/England-Brighton',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '39',
+        
+            sofaTeamName: 'Newcastle United',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/newcastle-united/39',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '23',
+        
+            whoTeamName: 'Newcastle United',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/23/Show/England-Newcastle-United',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '74',
+        
+            sofaTeamName: 'Swansea City',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/swansea-city/74',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '259',
+        
+            whoTeamName: 'Swansea',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/259/Show/Wales-Swansea',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '59',
+        
+            sofaTeamName: 'Huddersfield Town',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/huddersfield-town/59',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '166',
+        
+            whoTeamName: 'Huddersfield',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/166/Show/England-Huddersfield',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '7',
+        
+            sofaTeamName: 'Crystal Palace',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/crystal-palace/7',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '162',
+        
+            whoTeamName: 'Crystal Palace',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/162/Show/England-Crystal-Palace',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '37',
+        
+            sofaTeamName: 'West Ham United',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/west-ham-united/37',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '29',
+        
+            whoTeamName: 'West Ham',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/29/Show/England-West-Ham',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '45',
+        
+            sofaTeamName: 'Southampton',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/southampton/45',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '18',
+        
+            whoTeamName: 'Southampton',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/18/Show/England-Southampton',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '29',
+        
+            sofaTeamName: 'Stoke City',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/stoke-city/29',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
             whoTeamId: '96',
+        
             whoTeamName: 'Stoke',
+        
             whoTeamLink: 'https://www.whoscored.com/Teams/96/Show/England-Stoke',
+        
+        },
+        
+        
+        {
+        
+            sofaProviderName: 'SofaScore',
+        
+            sofaTeamId: '8',
+        
+            sofaTeamName: 'West Bromwich Albion',
+        
+            sofaTeamLink: 'https://www.sofascore.com/team/football/west-bromwich-albion/8',
+        
+        
+            whoScoredProviderName: 'WhoScored',
+        
+            whoTeamId: '175',
+        
+            whoTeamName: 'West Bromwich Albion',
+        
+            whoTeamLink: 'https://www.whoscored.com/Teams/175/Show/England-West-Bromwich-Albion',
+        
         },
         {
             sofaProviderName: 'SofaScore',

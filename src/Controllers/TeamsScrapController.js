@@ -93,6 +93,8 @@ exports.save_team_scrap_info = function (req, res) {
             });
 
             if (newArray.length > 0) {
+                newArray[0].actualCompetitionName = teamInfo.league;
+
                 teamInfo.nextScrapAt = newArray[0].nextScrapAt;
                 if (teamInfo.nextScrapAt)
                     logger.info('New scrap date: ' + teamInfo.nextScrapAt);

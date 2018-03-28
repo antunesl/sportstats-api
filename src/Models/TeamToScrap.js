@@ -13,7 +13,7 @@ var TeamToScrapSchema = new Schema({
     permalink: String,
 
     name: String,
-
+    
     providers: [
         {
             name: String,

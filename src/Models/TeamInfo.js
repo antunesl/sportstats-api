@@ -17,6 +17,8 @@ var TeamInfo = new Schema({
 
     name: String,
 
+    actualCompetitionName: String,
+
     providerInfo: {
         name: String,
         link: String
