@@ -88,11 +88,15 @@ class TeamsScrapInfoController extends BaseController {
 
             // UPDATE Next Scrap Date
             dbTeamScrapInfo.forEach(teamInfo => {
+                teamInfo.hasPreview = false;
+                teamInfo.previewLink = '';
+
                 var newArray = teamsData.filter(function (el) {
                     return el.permalink == teamInfo.permalink;
                 });
 
                 if (newArray.length > 0) {
+
                     teamInfo.nextScrapAt = newArray[0].nextScrapAt;
                     if (teamInfo.nextScrapAt)
                         logger.info('New scrap date: ' + teamInfo.nextScrapAt);
