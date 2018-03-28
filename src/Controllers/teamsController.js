@@ -211,7 +211,7 @@ class TeamsController extends BaseController {
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
 
-                logger.info('dbResult: ' + JSON.stringify(dbTeams));
+                logger.info('dbResult: ' + JSON.stringify(dbTeams.docs));
 
                 var result = [];
                 dbTeams.docs.forEach(team => {
@@ -1441,7 +1441,7 @@ class TeamsController extends BaseController {
         var ids = [];
         previews.forEach(preview => {
             ids.push(preview.home);
-            ids.push(preview.away);
+            
         });
 
         TeamInfo.find({
@@ -1492,7 +1492,7 @@ class TeamsController extends BaseController {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
-
+                logger.info('Updating hasPreview for ' + dbTeams.docs.length);
                 dbTeams.docs.forEach(element => {
                     element.hasPreview = true;
                 });
