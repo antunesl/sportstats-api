@@ -169,7 +169,8 @@ class TeamsController extends BaseController {
 
                 var docs = [];
                 data.docs.forEach(doc => {
-                    if (!doc.hasPreview)
+                    logger.info('hasPreview: ' + doc.hasPreview);
+                    if (doc.hasPreview == false)
                         docs.push(doc);
                 });
 
