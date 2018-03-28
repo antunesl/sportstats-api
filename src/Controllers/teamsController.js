@@ -214,7 +214,7 @@ class TeamsController extends BaseController {
                 logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
                 var result = [];
-                dbTeams.forEach(team => {
+                dbTeams.docs.forEach(team => {
                     logger.info(' » Getting preview link for team "' + team.name + '": ' + team.nextGame.previewLink);
                     result.push({
                         home: team.nextGame.homeTeamLink,
@@ -1481,7 +1481,26 @@ class TeamsController extends BaseController {
                 logger.info('Team info data succesfully saved for ' + updateRows.length + ' teams.');
             }
 
-            return res.json(responseModel.successResponse());
+
+
+            TeamsToScrap.find({
+                permalink: {
+                    $in: ids
+                }
+            }, function (err, dbTeams) {
+                if (err) {
+                    logger.error(err);
+                    return res.status(500).json(responseModel.errorResponse(err));
+                }
+
+                dbTeams.docs.forEach(element => {
+                    element.hasPreview = true;
+                });
+
+                var result3 = TeamsToScrap.upsertMany(dbTeams.docs, matchFields);
+
+                return res.json(responseModel.successResponse());
+            });
         });
     }
 }
