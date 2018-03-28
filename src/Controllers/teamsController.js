@@ -147,7 +147,7 @@ class TeamsController extends BaseController {
         var now = new Date();
         var filter = {
             previewLink: {
-                "$exists": false
+                "$ne": null
             }
         };
 
