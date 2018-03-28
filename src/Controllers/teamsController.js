@@ -146,6 +146,7 @@ class TeamsController extends BaseController {
 
         var now = new Date();
         var filter = {
+            hasPreview: { "$exists": false },
             hasPreview: false
         };
 
