@@ -199,9 +199,10 @@ class TeamsController extends BaseController {
         };
 
         TeamInfo.find({
-            "nextGame.previewLink": {
-                    "$exists": true,
-                    "$ne": null
+            nextGame: {
+                previewLink: {
+                    "$exists": true
+                }
             }
         },
             options,
@@ -210,6 +211,8 @@ class TeamsController extends BaseController {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
+                
+                logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
                 var result = [];
                 dbTeams.forEach(team => {
