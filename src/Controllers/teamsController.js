@@ -156,7 +156,7 @@ class TeamsController extends BaseController {
 
 
 
-        TeamInfo.paginate(
+        TeamsToScrap.paginate(
             filter,
             options,
             function (err, data) {
@@ -164,7 +164,6 @@ class TeamsController extends BaseController {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
-                logger.info(JSON.stringify(data));
                 logger.info('» Items: ' + data.docs.length);
 
                 var docs = [];
@@ -1316,6 +1315,7 @@ class TeamsController extends BaseController {
                 logger.info(' » (' + team.country + ') ' + team.name + ' » ' + team.permalink);
             }
 
+            team.hasPreview = false;
 
             // SETTING GAMES TO BE SCRAPED
             if (team.nextGame) {
@@ -1411,6 +1411,8 @@ class TeamsController extends BaseController {
                         homeTeamLink: nextGameArray[0].homeTeamLink,
                         awayTeamName: nextGameArray[0].awayTeamName,
                         awayTeamLink: nextGameArray[0].awayTeamLink
+
+                        
                     };
                     console.log('2 - NextGameScrapDate for ' + teamInfo.name + ': ' + teamInfo.nextGameScrapAt);
                 }

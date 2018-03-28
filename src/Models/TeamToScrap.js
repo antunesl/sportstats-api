@@ -41,6 +41,8 @@ var TeamToScrapSchema = new Schema({
         awayTeamLink: String
     },
 
+    hasPreview: Boolean,
+    
     createdAt: {
         type: Date,
         default: Date.now
