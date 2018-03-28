@@ -146,9 +146,7 @@ class TeamsController extends BaseController {
 
         var now = new Date();
         var filter = {
-            previewLink: {
-                "$ne": null
-            }
+            hasPreview: false
         };
 
         var options = {
@@ -1456,7 +1454,7 @@ class TeamsController extends BaseController {
 
                     if (newArray.length > 0) {
                         team.previewLink = newArray[0].link;
-                        team.hasPreview = newArray[0].link;
+                        team.hasPreview = true;
 
                         team.nextGame.previewLink = newArray[0].link;
                         logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
