@@ -1432,6 +1432,8 @@ class TeamsController extends BaseController {
     save_team_game_scrap_info(req, res) {
         var previews = req.body.docs;
 
+        logger.info(previews);
+
         var ids = [];
         previews.forEach(preview => {
             ids.push(preview.home);
@@ -1447,6 +1449,8 @@ class TeamsController extends BaseController {
                 logger.error(err);
                 return res.status(500).json(responseModel.errorResponse(err));
             }
+
+            logger.info('Found ' + dbTeams.length + ' teams.');
 
             var updateRows = [];
             dbTeams.forEach(team => {
