@@ -265,6 +265,7 @@ class TeamsController extends BaseController {
 
                     if (newArray.length > 0) {
                         teamInfo.hasPreview = true;
+                        teamInfo.previewScrapDone = true;
                         teamInfo.updatedAt = new Date();
                         teamInfo.nextGame = {
                             homeTeam: newArray[0].homeTeam,
@@ -1302,6 +1303,7 @@ class TeamsController extends BaseController {
             }
 
             team.hasPreview = false;
+            team.previewScrapDone = false;
 
             // SETTING GAMES TO BE SCRAPED
             if (team.nextGame) {
