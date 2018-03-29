@@ -201,7 +201,7 @@ class TeamsController extends BaseController {
             limit: 10
         };
 
-        TeamInfo.find({ hasPreview: true, previewScrapDone: false })
+        TeamInfo.find({ hasPreview: true, previewScrapDone: false }, options)
             .then(function (dbTeams) {
                 logger.info('dbResult: ' + JSON.stringify(dbTeams));
 

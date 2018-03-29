@@ -75,6 +75,7 @@ class CompetitionController extends BaseController {
 
         //         request.get('http://api.football-data.org/v1/competitions/445')
         //             .on('response', function (response) {
+        //                 console.log(response);
         //                 console.log(response.statusCode) // 200
         //                 console.log(response.headers['content-type']) // 'image/png'
         //             });
