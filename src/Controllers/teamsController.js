@@ -201,29 +201,30 @@ class TeamsController extends BaseController {
             limit: 10
         };
 
-        TeamInfo.find({ hasPreview: true, previewScrapDone: false }, options, function (err, data) {
-            if (err) {
-                logger.error(err);
-                return res.status(500).json(responseModel.errorResponse(err));
-            }
+        TeamInfo.paginate({ hasPreview: true, previewScrapDone: false }, options,
+            function (err, data) {
+                if (err) {
+                    logger.error(err);
+                    return res.status(500).json(responseModel.errorResponse(err));
+                }
 
-            logger.info('dbResult: ' + JSON.stringify(dbTeams));
+                logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
-            var result = [];
-            var ids = [];
-            dbTeams.forEach(team => {
-                logger.info(' » Getting preview link for team "' + team.name + '": ' + team.nextGame.previewLink);
-                ids.push(team.permalink);
-                result.push({
-                    home: team.permalink,
-                    link: team.nextGame.previewLink
+                var result = [];
+                var ids = [];
+                dbTeams.forEach(team => {
+                    logger.info(' » Getting preview link for team "' + team.name + '": ' + team.nextGame.previewLink);
+                    ids.push(team.permalink);
+                    result.push({
+                        home: team.permalink,
+                        link: team.nextGame.previewLink
+                    });
                 });
+
+                logger.info('result:' + JSON.stringify(result));
+
+                return res.json(responseModel.successResponse(result));
             });
-
-            logger.info('result:' + JSON.stringify(result));
-
-            return res.json(responseModel.successResponse(result));
-        });
     }
 
 
