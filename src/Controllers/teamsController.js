@@ -202,7 +202,7 @@ class TeamsController extends BaseController {
         };
 
         TeamInfo.paginate({ hasPreview: true, previewScrapDone: false }, options,
-            function (err, data) {
+            function (err, dbTeams) {
                 if (err) {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
