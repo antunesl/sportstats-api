@@ -213,8 +213,8 @@ class LeaguesController extends BaseController {
                                 });
                                 if (newArray.length > 0) {
                                     teamsToResults.push({
-                                        name: newArray[0].sofaTeamName,
-                                        link: newArray[0].sofaTeamLink,
+                                        name: newArray[0].whoTeamName,
+                                        link: newArray[0].whoTeamLink,
                                     });
 
                                 }
