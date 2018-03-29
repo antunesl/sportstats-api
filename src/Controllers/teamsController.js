@@ -233,20 +233,7 @@ class TeamsController extends BaseController {
      * @param {*} res 
      */
     save_game_preview_scrap_info(req, res) {
-        // recebe array  de:
-        var data = {
-            homeTeamPermalink: '',
-            awayTeamPermalink: '',
-            homeTeam: $('div.match-header > table > tbody > tr > td.team')[0].innerText,
-            awayTeam: $('div.match-header > table > tbody > tr > td.team')[1].innerText,
-            homeLineup: homeLineup,
-            awayLineup: awayLineup,
-            homeNews: homeNews,
-            awayNews: awayNews,
-            missingHomePlayers: missingHomePlayers,
-            missingAwayPlayers: missingAwayPlayers
-        };
-
+        
         var previewsData = req.body;
         var ids = [];
         logger.info('Saving ' + previewsData.length + ' previews:');
@@ -260,52 +247,48 @@ class TeamsController extends BaseController {
             }
         });
 
-        TeamInfo.find({
-            permalink: {
-                $in: ids
-            }
-        }, function (err, dbTeamInfo) {
-            if (err) {
-                logger.error(err);
-                return res.status(500).json(response.errorResponse(err));
-            }
+        TeamInfo.find({ permalink: { $in: ids } })
+            .then(function (dbTeamInfo) {
 
-            logger.info('Got ' + dbTeamInfo.length + ' Teams from db');
-            if (dbTeamInfo.length == 0) {
-                logger.info('Nothing to do...returning "204 No Content".');
-                return res.status(204).json(response.errorResponse('Found no teams to update.'));
-            }
+                logger.info('Got ' + dbTeamInfo.length + ' Teams from db');
+                if (dbTeamInfo.length == 0) {
+                    logger.info('Nothing to do...returning "204 No Content".');
+                    return res.status(204).json(response.errorResponse('Found no teams to update.'));
+                }
 
-            // UPDATE NextGame
-            dbTeamInfo.forEach(teamInfo => {
-                var newArray = teamsData.filter(function (el) {
-                    return el.permalink == teamInfo.permalink;
+                // UPDATE NextGame
+                dbTeamInfo.forEach(teamInfo => {
+                    var newArray = teamsData.filter(function (el) {
+                        return el.permalink == teamInfo.permalink;
+                    });
+
+                    if (newArray.length > 0) {
+                        teamInfo.updatedAt = new Date();
+                        teamInfo.nextGame = {
+                            homeTeam: newArray[0].homeTeam,
+                            awayTeam: newArray[0].awayTeam,
+                            homeLineup: newArray[0].homeLineup,
+                            awayLineup: newArray[0].awayLineup,
+                            homeNews: newArray[0].homeNews,
+                            awayNews: newArray[0].awayNews,
+                            missingHomePlayers: newArray[0].missingHomePlayers,
+                            missingAwayPlayers: newArray[0].missingAwayPlayers
+                        };
+                        console.log('Setting NextGame for ' + teamInfo.name + ': ' + teamInfo.nextGame.homeTeam + ' vs ' + teamInfo.nextGame.awayTeam);
+                    }
                 });
 
-                if (newArray.length > 0) {
-                    teamInfo.updatedAt = new Date();
-                    teamInfo.nextGame = {
-                        homeTeam: newArray[0].homeTeam,
-                        awayTeam: newArray[0].awayTeam,
-                        homeLineup: newArray[0].homeLineup,
-                        awayLineup: newArray[0].awayLineup,
-                        homeNews: newArray[0].homeNews,
-                        awayNews: newArray[0].awayNews,
-                        missingHomePlayers: newArray[0].missingHomePlayers,
-                        missingAwayPlayers: newArray[0].missingAwayPlayers
-                    };
-                    console.log('Setting NextGame for ' + teamInfo.name + ': ' + teamInfo.nextGame.homeTeam + ' vs ' + teamInfo.nextGame.awayTeam);
-                }
+                const matchFields = ['permalink'];
+
+
+                var result2 = TeamInfo.upsertMany(dbTeamInfo, matchFields);
+                logger.info('Team info data succesfully saved for ' + dbTeamInfo.length + ' teams.');
+
+                return res.json(responseModel.successResponse());
+            }).catch(function (err) {
+                logger.error(err);
+                return res.status(500).json(response.errorResponse(err));
             });
-
-            const matchFields = ['permalink'];
-
-
-            var result2 = TeamInfo.upsertMany(dbTeamInfo, matchFields);
-            logger.info('Team info data succesfully saved for ' + dbTeamInfo.length + ' teams.');
-
-            return res.json(responseModel.successResponse());
-        });
     }
 
 
