@@ -201,7 +201,7 @@ class TeamsController extends BaseController {
             limit: 10
         };
 
-        TeamInfo.find({ hasPreview: true })
+        TeamInfo.find({ hasPreview: true, previewScrapDone: false })
             .then(function (dbTeams) {
                 logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
@@ -264,6 +264,7 @@ class TeamsController extends BaseController {
                     });
 
                     if (newArray.length > 0) {
+                        teamInfo.hasPreview = true;
                         teamInfo.updatedAt = new Date();
                         teamInfo.nextGame = {
                             homeTeam: newArray[0].homeTeam,
@@ -282,8 +283,10 @@ class TeamsController extends BaseController {
                 const matchFields = ['permalink'];
 
 
+                logger.info('Save in db: ' + JSON.stringify(dbTeamInfo));
+
                 var result2 = TeamInfo.upsertMany(dbTeamInfo, matchFields);
-                logger.info('Team info data succesfully saved for ' + dbTeamInfo.length + ' teams.');
+                logger.info('Preview info data succesfully saved for ' + dbTeamInfo.length + ' teams.');
 
                 return res.json(responseModel.successResponse());
             }).catch(function (err) {
