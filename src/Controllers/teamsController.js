@@ -202,6 +202,11 @@ class TeamsController extends BaseController {
         };
 
         TeamInfo.find({ hasPreview: true, previewScrapDone: false }, options)
+            .project({
+                _id: 1,
+                permalink: 1,
+                nextGame: 1
+            })
             .then(function (dbTeams) {
                 logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
