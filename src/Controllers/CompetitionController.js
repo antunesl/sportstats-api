@@ -6,7 +6,9 @@ var logger = require('../Logger.js'),
     CompetitionScrapInfo = mongoose.model('CompetitionScrapInfo'),
     async = require('async'),
     response = require('./Response.js'),
-    CompetitionsScrapInfoController = require('../Controllers/CompetitionScrapInfoController');
+    CompetitionsScrapInfoController = require('../Controllers/CompetitionScrapInfoController'),
+    LeaguesToScrap = mongoose.model('LeaguesToScrap'),
+    request = require('request');
 
 
 class CompetitionController extends BaseController {
@@ -44,7 +46,7 @@ class CompetitionController extends BaseController {
                 competitionId: data.id,
                 countryId: data.countryId,
                 providers: providersInfo,
-                
+
                 createdAt: new Date(),
                 nextScrapAt: new Date(),
             });
@@ -67,11 +69,33 @@ class CompetitionController extends BaseController {
 
         var competitionId = req.params.id;
 
+
+        // LeaguesToScrap.findOne({ permalink: competitionId })
+        //     .then(function (data) {
+
+        //         request.get('http://api.football-data.org/v1/competitions/445')
+        //             .on('response', function (response) {
+        //                 console.log(response.statusCode) // 200
+        //                 console.log(response.headers['content-type']) // 'image/png'
+        //             });
+
+
+        //         return res.json(response.successResponse(data));
+        //     })
+        //     .catch(function (err) {
+        //         logger.error(err);
+        //         return res.status(500).json(response.errorResponse(err));
+        //     });
+
         Competition.findOne({ id: competitionId }, function (err, data) {
             if (err) {
                 logger.error(err);
                 return res.status(500).json(response.errorResponse(err));
             }
+
+            console.log(data);
+
+
             return res.json(response.successResponse(data));
         });
     }

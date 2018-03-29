@@ -151,7 +151,7 @@ class TeamsController extends BaseController {
 
         var options = {
             page: 1,
-            limit: 1
+            limit: 10
         };
 
 

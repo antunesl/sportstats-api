@@ -27,9 +27,9 @@
     "mongoose-paginate": "^5.0.3",
     "morgan": "^1.9.0",
     "nodemon": "^1.17.1",
-    "request": "^2.83.0",
     "swagger-jsdoc": "^1.9.7",
     "swagger-ui-express": "^2.0.15",
-    "winston": "^3.0.0-rc1"
+    "winston": "^3.0.0-rc1",
+    "request": "^2.85.0"
   }
 }

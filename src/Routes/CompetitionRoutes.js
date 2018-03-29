@@ -70,7 +70,5 @@ module.exports = function (app) {
         .post(competitionsCtrl.create_competition);
 
 
-   
-
 
 };
