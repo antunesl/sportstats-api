@@ -215,6 +215,8 @@ class TeamsController extends BaseController {
                     });
                 });
 
+                logger.info('result:' + JSON.stringify(result));
+
                 return res.json(responseModel.successResponse(result));
             })
             .catch(function (err) {
