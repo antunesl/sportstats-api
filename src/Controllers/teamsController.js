@@ -198,19 +198,11 @@ class TeamsController extends BaseController {
 
         var options = {
             page: 1,
-            limit: 1
+            limit: 10
         };
 
-        TeamInfo.find({
-            hasPreview: true
-        },
-            options,
-            function (err, dbTeams) {
-                if (err) {
-                    logger.error(err);
-                    return res.status(500).json(responseModel.errorResponse(err));
-                }
-
+        TeamInfo.find({ hasPreview: true })
+            .then(function (dbTeams) {
                 logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
                 var result = [];
@@ -224,6 +216,10 @@ class TeamsController extends BaseController {
                 });
 
                 return res.json(responseModel.successResponse(result));
+            })
+            .catch(function (err) {
+                logger.error(err);
+                return res.status(500).json(responseModel.errorResponse(err));
             });
     }
 
@@ -1486,7 +1482,7 @@ class TeamsController extends BaseController {
 
             TeamsToScrap.find({ permalink: { $in: ids } })
                 .then(function (dbTeams) {
-                    
+
                     dbTeams.forEach(element => {
                         element.hasPreview = true;
                         logger.info('Updating "hasPreview » true" for ' + element.name);
@@ -1498,7 +1494,7 @@ class TeamsController extends BaseController {
 
                     return res.json(responseModel.successResponse());
                 })
-                .catch(function(err){
+                .catch(function (err) {
                     logger.error(err);
                     return res.status(500).json(responseModel.errorResponse(err));
                 });
