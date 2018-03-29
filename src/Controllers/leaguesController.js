@@ -222,7 +222,7 @@ class LeaguesController extends BaseController {
                             });
 
                             results.push({
-                                league: link,
+                                league: league.link,
                                 teams: teamsToResults
                             });
                         });
