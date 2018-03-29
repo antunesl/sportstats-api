@@ -100,7 +100,7 @@ class TeamsController extends BaseController {
 
         var options = {
             page: 1,
-            limit: 1,
+            limit: 10,
             sort: {
                 createdAt: -1
             }
@@ -1372,6 +1372,7 @@ class TeamsController extends BaseController {
                 });
 
                 if (newArray.length > 0) {
+                    teamInfo.hasPreview = false;
                     teamInfo.nextScrapAt = newArray[0].nextScrapAt;
                     if (teamInfo.nextScrapAt)
                         logger.info('New scrap date: ' + teamInfo.nextScrapAt);
