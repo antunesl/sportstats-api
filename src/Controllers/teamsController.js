@@ -1486,6 +1486,7 @@ class TeamsController extends BaseController {
 
             TeamsToScrap.find({ permalink: { $in: ids } })
                 .then(function (dbTeams) {
+                    logger.info(JSON.stringify(dbTeams));
                     logger.info('Updating hasPreview for ' + dbTeams.docs.length);
                     dbTeams.docs.forEach(element => {
                         element.hasPreview = true;
