@@ -259,7 +259,7 @@ class TeamsController extends BaseController {
 
                 // UPDATE NextGame
                 dbTeamInfo.forEach(teamInfo => {
-                    var newArray = teamsData.filter(function (el) {
+                    var newArray = previewsData.filter(function (el) {
                         return el.permalink == teamInfo.permalink;
                     });
 
