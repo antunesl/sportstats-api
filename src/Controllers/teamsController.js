@@ -1482,7 +1482,7 @@ class TeamsController extends BaseController {
             }
 
 
-
+            logger.info('Going to search TeamsToScrap: ' + JSON.stringify(ids));
             TeamsToScrap.find({
                 permalink: {
                     $in: ids
