@@ -5,7 +5,8 @@ var logger = require('../Logger.js'),
     LeaguesToScrap = mongoose.model('LeaguesToScrap'),
     TeamsToScrap = mongoose.model('TeamsToScrap'),
     async = require('async'),
-    responseModel = require('./Response.js');
+    responseModel = require('./Response.js'),
+    scrapDictionary = require('../scrapDictionary');
 
 class LeaguesController extends BaseController {
 
@@ -161,6 +162,99 @@ class LeaguesController extends BaseController {
             return res.json(responseModel.successResponse(doc));
         });
     }
+
+
+    /**
+     * 
+     * @param {*} req 
+     * @param {*} res 
+     */
+    get_pending_league_games_to_scrap(req, res) {
+
+
+        // scrapDictionary
+        LeaguesToScrap.paginate({}, { limit: 10 })
+            .then(function (dbLeagues) {
+
+                var leagues = [];
+                var leagueNames = [];
+                dbLeagues.forEach(league => {
+                    if (!leagueNames.includes(league.name)) {
+                        leagueNames.push(league.name);
+                        leagues.push({ name: league.name, link: league.providers[0].link });
+                    }
+                });
+
+
+                TeamsToScrap.find({
+                    league: { $in: leagueNames }
+                })
+                    .then(function (dbTeams) {
+
+                        var results = [];
+                        if (newArray.length > 0) {
+
+                            leagues.forEach(league => {
+
+
+                                var teamsToResults = [];
+                                var leagueTeams = dbTeams.filter(function (el) {
+                                    return el.league == league.name;
+                                });
+
+                                leagueTeams.forEach(leagueTeam => {
+
+                                    var newArray = scrapDictionary.filter(function (el) {
+                                        if (leagueTeam.providers.length == 0)
+                                            return false;
+
+                                        return el.sofaTeamLink == leagueTeam.providers[0].link;
+                                    });
+                                    if (newArray.length > 0) {
+                                        teamsToResults.push({
+                                            name: newArray[0].sofaTeamName,
+                                            link: newArray[0].sofaTeamLink,
+                                        });
+
+                                    }
+
+                                });
+
+                                results.push({
+                                    league: link,
+                                    teams: teamsToResults
+                                });
+                            });
+
+                        }
+
+
+                        return res.json(responseModel.successResponse(results));
+                    })
+                    .catch(function (err) {
+                        logger.error(err);
+                        return res.json(responseModel.errorResponse(err));
+                    });
+
+
+
+            })
+            .catch(function (err) {
+                logger.error(err);
+                return res.json(responseModel.errorResponse(err));
+            });
+
+
+
+
+
+
+
+    }
+
+
+
+
 
 
     /**
