@@ -211,10 +211,10 @@ class TeamsController extends BaseController {
                     return res.status(500).json(responseModel.errorResponse(err));
                 }
 
-                logger.info('dbResult: ' + JSON.stringify(dbTeams.docs));
+                logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
                 var result = [];
-                dbTeams.docs.forEach(team => {
+                dbTeams.forEach(team => {
                     logger.info(' » Getting preview link for team "' + team.name + '": ' + team.nextGame.previewLink);
                     result.push({
                         home: team.nextGame.homeTeamLink,
