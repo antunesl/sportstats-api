@@ -1412,7 +1412,7 @@ class TeamsController extends BaseController {
                         awayTeamName: nextGameArray[0].awayTeamName,
                         awayTeamLink: nextGameArray[0].awayTeamLink
 
-                        
+
                     };
                     console.log('2 - NextGameScrapDate for ' + teamInfo.name + ': ' + teamInfo.nextGameScrapAt);
                 }
@@ -1441,7 +1441,7 @@ class TeamsController extends BaseController {
         var ids = [];
         previews.forEach(preview => {
             ids.push(preview.home);
-            
+
         });
 
         TeamInfo.find({
@@ -1483,24 +1483,31 @@ class TeamsController extends BaseController {
 
 
             logger.info('Going to search TeamsToScrap: ' + JSON.stringify(ids));
-            TeamsToScrap.find({
-                permalink: {
-                    $in: ids
-                }
-            }, function (err, dbTeams) {
-                if (err) {
-                    logger.error(err);
-                    return res.status(500).json(responseModel.errorResponse(err));
-                }
-                logger.info('Updating hasPreview for ' + dbTeams.docs.length);
-                dbTeams.docs.forEach(element => {
-                    element.hasPreview = true;
-                });
 
-                var result3 = TeamsToScrap.upsertMany(dbTeams.docs, matchFields);
+            TeamsToScrap.find({ permalink: { $in: ids } })
+                .then(function (dbTeams) {
+                    logger.info('Updating hasPreview for ' + dbTeams.docs.length);
+                    dbTeams.docs.forEach(element => {
+                        element.hasPreview = true;
+                    });
 
-                return res.json(responseModel.successResponse());
-            });
+                    var result3 = TeamsToScrap.upsertMany(dbTeams.docs, matchFields);
+
+                    return res.json(responseModel.successResponse());
+                })
+                .catch(err => res.status(500).json(responseModel.errorResponse(err)))
+
+            // TeamsToScrap.find({
+            //     permalink: {
+            //         $in: ids
+            //     }
+            // }, function (err, dbTeams) {
+            //     if (err) {
+            //         logger.error(err);
+            //         return res.status(500).json(responseModel.errorResponse(err));
+            //     }
+            //     
+            // });
         });
     }
 }
