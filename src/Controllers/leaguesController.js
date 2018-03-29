@@ -178,7 +178,7 @@ class LeaguesController extends BaseController {
 
                 var leagues = [];
                 var leagueNames = [];
-                dbLeagues.forEach(league => {
+                dbLeagues.docs.forEach(league => {
                     if (!leagueNames.includes(league.name)) {
                         leagueNames.push(league.name);
                         leagues.push({ name: league.name, link: league.providers[0].link });
