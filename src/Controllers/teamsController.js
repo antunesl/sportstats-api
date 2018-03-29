@@ -1495,7 +1495,10 @@ class TeamsController extends BaseController {
 
                     return res.json(responseModel.successResponse());
                 })
-                .catch(err => res.status(500).json(responseModel.errorResponse(err)))
+                .catch(function(err){
+                    logger.error(err);
+                    return res.status(500).json(responseModel.errorResponse(err));
+                });
 
             // TeamsToScrap.find({
             //     permalink: {
