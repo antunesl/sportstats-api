@@ -236,7 +236,7 @@ class TeamsController extends BaseController {
         
         var previewsData = req.body;
         var ids = [];
-        logger.info(JSON.stringify());
+        logger.info(JSON.stringify(previewsData));
         logger.info('Saving ' + previewsData.length + ' previews:');
         previewsData.forEach(preview => {
             if (!preview.homeTeamPermalink) {
