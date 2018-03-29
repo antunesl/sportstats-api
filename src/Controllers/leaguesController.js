@@ -191,43 +191,41 @@ class LeaguesController extends BaseController {
                 })
                     .then(function (dbTeams) {
 
+                        logger.info('Got ' + dbTeams.length + ' teams!');
                         var results = [];
-                        if (newArray.length > 0) {
-
-                            leagues.forEach(league => {
 
 
-                                var teamsToResults = [];
-                                var leagueTeams = dbTeams.filter(function (el) {
-                                    return el.league == league.name;
-                                });
+                        leagues.forEach(league => {
 
-                                leagueTeams.forEach(leagueTeam => {
 
-                                    var newArray = scrapDictionary.filter(function (el) {
-                                        if (leagueTeam.providers.length == 0)
-                                            return false;
-
-                                        return el.sofaTeamLink == leagueTeam.providers[0].link;
-                                    });
-                                    if (newArray.length > 0) {
-                                        teamsToResults.push({
-                                            name: newArray[0].sofaTeamName,
-                                            link: newArray[0].sofaTeamLink,
-                                        });
-
-                                    }
-
-                                });
-
-                                results.push({
-                                    league: link,
-                                    teams: teamsToResults
-                                });
+                            var teamsToResults = [];
+                            var leagueTeams = dbTeams.filter(function (el) {
+                                return el.league == league.name;
                             });
 
-                        }
+                            leagueTeams.forEach(leagueTeam => {
 
+                                var newArray = scrapDictionary.filter(function (el) {
+                                    if (leagueTeam.providers.length == 0)
+                                        return false;
+
+                                    return el.sofaTeamLink == leagueTeam.providers[0].link;
+                                });
+                                if (newArray.length > 0) {
+                                    teamsToResults.push({
+                                        name: newArray[0].sofaTeamName,
+                                        link: newArray[0].sofaTeamLink,
+                                    });
+
+                                }
+
+                            });
+
+                            results.push({
+                                league: link,
+                                teams: teamsToResults
+                            });
+                        });
 
                         return res.json(responseModel.successResponse(results));
                     })
