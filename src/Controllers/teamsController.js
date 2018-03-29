@@ -233,7 +233,7 @@ class TeamsController extends BaseController {
      * @param {*} res 
      */
     save_game_preview_scrap_info(req, res) {
-        
+
         var previewsData = req.body;
         var ids = [];
         logger.info(JSON.stringify(previewsData));
@@ -1367,13 +1367,22 @@ class TeamsController extends BaseController {
 
             // UPDATE Next Scrap Date
             dbTeamsToScrap.forEach(teamInfo => {
-                var newArray = teamsData.filter(function (el) {
+                var teamsArray = teamsData.filter(function (el) {
                     return el.permalink == teamInfo.permalink;
                 });
 
-                if (newArray.length > 0) {
+                var nextGameArray = nextGames.filter(function (el) {
+                    return el.permalink == teamInfo.permalink;
+                });
+
+
+                if (teamsArray.length > 0) {
+                    if (teamInfo.nextGame) {
+                        if (nextGameArray.length > 0)
+                            teamInfo.nextGame.date = nextGameArray[0].date;
+                    }
                     teamInfo.hasPreview = false;
-                    teamInfo.nextScrapAt = newArray[0].nextScrapAt;
+                    teamInfo.nextScrapAt = teamsArray[0].nextScrapAt;
                     if (teamInfo.nextScrapAt)
                         logger.info('New scrap date: ' + teamInfo.nextScrapAt);
                     else {
@@ -1384,9 +1393,7 @@ class TeamsController extends BaseController {
                 }
 
 
-                var nextGameArray = nextGames.filter(function (el) {
-                    return el.permalink == teamInfo.permalink;
-                });
+
 
                 if (nextGameArray.length > 0) {
                     console.log('1 - NextGameScrapDate for ' + teamInfo.name);
