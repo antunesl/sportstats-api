@@ -206,11 +206,12 @@ class TeamsController extends BaseController {
                 logger.info('dbResult: ' + JSON.stringify(dbTeams));
 
                 var result = [];
+                var ids = [];
                 dbTeams.forEach(team => {
                     logger.info(' » Getting preview link for team "' + team.name + '": ' + team.nextGame.previewLink);
+                    ids.push(team.permalink);
                     result.push({
-                        home: team.nextGame.homeTeamLink,
-                        away: team.nextGame.awayTeamLink,
+                        home: team.permalink,
                         link: team.nextGame.previewLink
                     });
                 });
