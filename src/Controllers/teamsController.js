@@ -236,9 +236,10 @@ class TeamsController extends BaseController {
         
         var previewsData = req.body;
         var ids = [];
+        logger.info(JSON.stringify());
         logger.info('Saving ' + previewsData.length + ' previews:');
         previewsData.forEach(preview => {
-            if (!preview.homeTeamPermalink || !preview.awayTeamPermalink) {
+            if (!preview.homeTeamPermalink) {
                 logger.info(' » A preview has no required data! (skip item)');
             } else {
                 ids.push(preview.homeTeamPermalink);
@@ -253,7 +254,7 @@ class TeamsController extends BaseController {
                 logger.info('Got ' + dbTeamInfo.length + ' Teams from db');
                 if (dbTeamInfo.length == 0) {
                     logger.info('Nothing to do...returning "204 No Content".');
-                    return res.status(204).json(response.errorResponse('Found no teams to update.'));
+                    return res.status(204).json(responseModel.errorResponse('Found no teams to update.'));
                 }
 
                 // UPDATE NextGame
@@ -287,7 +288,7 @@ class TeamsController extends BaseController {
                 return res.json(responseModel.successResponse());
             }).catch(function (err) {
                 logger.error(err);
-                return res.status(500).json(response.errorResponse(err));
+                return res.status(500).json(responseModel.errorResponse(err));
             });
     }
 
