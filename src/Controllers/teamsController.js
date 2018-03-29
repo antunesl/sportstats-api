@@ -1486,13 +1486,15 @@ class TeamsController extends BaseController {
 
             TeamsToScrap.find({ permalink: { $in: ids } })
                 .then(function (dbTeams) {
-                    logger.info(JSON.stringify(dbTeams));
-                    logger.info('Updating hasPreview for ' + dbTeams.docs.length);
-                    dbTeams.docs.forEach(element => {
+                    
+                    dbTeams.forEach(element => {
                         element.hasPreview = true;
+                        logger.info('Updating "hasPreview » true" for ' + element.name);
                     });
 
-                    var result3 = TeamsToScrap.upsertMany(dbTeams.docs, matchFields);
+                    var result3 = TeamsToScrap.upsertMany(dbTeams, matchFields);
+
+                    logger.info('Update result: ' + JSON.stringify(result3));
 
                     return res.json(responseModel.successResponse());
                 })
