@@ -2,6 +2,7 @@
 
 var logger = require('../Logger.js'),
     mongoose = require('mongoose'),
+    request = require('request'),
     Leagues = mongoose.model('Leagues'),
     LeaguesToScrap = mongoose.model('LeaguesToScrap'),
     TeamsToScrap = mongoose.model('TeamsToScrap'),
@@ -83,9 +84,31 @@ exports.create_league_to_scrap = function (req, res) {
 exports.save_league_scrap_info = function (req, res) {
     var leaguesData = req.body;
 
+
+    var footballDataDictionary = [{
+        permalink: 'England_PremierLeague',
+        id: 445,
+        link: 'http://api.football-data.org/v1/competitions/445'
+    }];
+
     var ids = [];
     logger.info('Saving ' + leaguesData.length + ' leagues:');
     leaguesData.forEach(league => {
+        var newArray = footballDataDictionary.filter(function (el) {
+            return el.permalink == league.permalink;
+        });
+        if (newArray.length > 0) {
+            console.log('Going to call football-data: ' + newArray[0].link);
+            request
+                .get(newArray[0].link)
+                .on('response', function (response) {
+                    console.log(response)
+                })
+                .on('error', function (err) {
+                    console.log(err)
+                });
+        }
+
         ids.push(league.permalink);
         logger.info(' » (' + league.country + ') ' + league.name);
     });
