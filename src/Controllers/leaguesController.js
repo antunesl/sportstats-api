@@ -238,6 +238,7 @@ class LeaguesController extends BaseController {
                         leagueInfo.standings.forEach(standing => {
                             var newTeamToScrap = new TeamsToScrap();
 
+                            newTeamToScrap.hasPreview = false;
                             newTeamToScrap.country = leagueInfo.country;
                             newTeamToScrap.league = leagueInfo.name;
                             newTeamToScrap.permalink = leagueInfo.permalink + '_' + standing.teamName.replace(/\s+/g, '');
