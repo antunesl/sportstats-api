@@ -1436,6 +1436,7 @@ class TeamsController extends BaseController {
     save_team_game_scrap_info(req, res) {
         var previews = req.body.docs;
 
+        const matchFields = ['permalink'];
         logger.info(previews);
 
         var ids = [];
@@ -1476,7 +1477,6 @@ class TeamsController extends BaseController {
             });
 
             if (updateRows.length > 0) {
-                const matchFields = ['permalink'];
                 var result2 = TeamInfo.upsertMany(updateRows, matchFields);
                 logger.info('Team info data succesfully saved for ' + updateRows.length + ' teams.');
             }
