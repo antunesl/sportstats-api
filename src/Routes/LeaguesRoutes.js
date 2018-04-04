@@ -133,4 +133,7 @@ module.exports = function (app) {
     app.route(`/${settings.api.apiBasePath}/${leaguesRoutePrefix}/games/scrap/pending`)
         .get(leaguesCtrl.get_pending_league_games_to_scrap);
 
+    app.route(`/${settings.api.apiBasePath}/${leaguesRoutePrefix}/games/scrap`)
+        .post(leaguesCtrl.save_league_games_to_scrap);
+
 };

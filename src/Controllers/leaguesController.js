@@ -180,8 +180,18 @@ class LeaguesController extends BaseController {
                 var leagueNames = [];
                 dbLeagues.docs.forEach(league => {
                     if (!leagueNames.includes(league.name)) {
-                        leagueNames.push(league.name);
-                        leagues.push({ name: league.name, link: league.providers[0].link });
+
+                        var whoScoredProvider = league.providers.filter(function (el) {
+                            return el.name == "WhoScored";
+                        });
+
+                        if (whoScoredProvider.length == 0) {
+                            logger.info("WhoScored provider info not found in LeagueToScrap !!");
+                        }
+                        else {
+                            leagueNames.push(league.name);
+                            leagues.push({ name: league.name, link: whoScoredProvider[0].link });
+                        }
                     }
                 });
 
@@ -251,6 +261,90 @@ class LeaguesController extends BaseController {
     }
 
 
+
+    save_league_games_to_scrap(req, res) {
+        var previews = req.body.docs;
+
+        const matchFields = ['permalink'];
+        logger.info(previews);
+
+        var ids = [];
+        previews.forEach(preview => {
+            ids.push(preview.home);
+
+        });
+
+        TeamInfo.find({
+            permalink: {
+                $in: ids
+            }
+        }, function (err, dbTeams) {
+            if (err) {
+                logger.error(err);
+                return res.status(500).json(responseModel.errorResponse(err));
+            }
+
+            logger.info('Found ' + dbTeams.length + ' teams.');
+
+            var updateRows = [];
+            dbTeams.forEach(team => {
+
+                if (team.nextGame) {
+                    var newArray = previews.filter(function (el) {
+                        return el.home == team.permalink;
+                    });
+
+                    if (newArray.length > 0) {
+                        team.previewLink = newArray[0].link;
+                        team.hasPreview = true;
+
+                        team.nextGame.previewLink = newArray[0].link;
+                        logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
+                        updateRows.push(team);
+                    }
+                }
+            });
+
+            if (updateRows.length > 0) {
+                var result2 = TeamInfo.upsertMany(updateRows, matchFields);
+                logger.info('Team info data succesfully saved for ' + updateRows.length + ' teams.');
+            }
+
+
+            logger.info('Going to search TeamsToScrap: ' + JSON.stringify(ids));
+
+            TeamsToScrap.find({ permalink: { $in: ids } })
+                .then(function (dbTeams) {
+
+                    dbTeams.forEach(element => {
+                        element.hasPreview = true;
+                        logger.info('Updating "hasPreview » true" for ' + element.name);
+                    });
+
+                    var result3 = TeamsToScrap.upsertMany(dbTeams, matchFields);
+
+                    logger.info('Update result: ' + JSON.stringify(result3));
+
+                    return res.json(responseModel.successResponse());
+                })
+                .catch(function (err) {
+                    logger.error(err);
+                    return res.status(500).json(responseModel.errorResponse(err));
+                });
+
+            // TeamsToScrap.find({
+            //     permalink: {
+            //         $in: ids
+            //     }
+            // }, function (err, dbTeams) {
+            //     if (err) {
+            //         logger.error(err);
+            //         return res.status(500).json(responseModel.errorResponse(err));
+            //     }
+            //     
+            // });
+        });
+    }
 
 
 
