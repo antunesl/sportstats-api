@@ -27,7 +27,7 @@ class ManagementController extends BaseController {
                 var jsonObject = JSON.parse(body);
 
                 res.render("competitions", {
-                    leagues: jsonObject.result.docs
+                    leagues: jsonObject.result
                 });
             });
 
