@@ -322,12 +322,12 @@ class LeaguesController extends BaseController {
                     dbTeams.forEach(element => {
                         league = element.league;
                         element.hasPreview = true;
-                        logger.info('Updating "hasPreview » true" for ' + element.name);
+                        element.previewScrapDone = false;
+                        logger.info('Updating "hasPreview » true && previewScrapDone » false" for ' + element.name);
                     });
 
                     var result3 = TeamsToScrap.upsertMany(dbTeams, matchFields);
                     logger.info('Update result: ' + JSON.stringify(result3));
-
                     logger.info("» League: " + league);
 
                     if (league) {
