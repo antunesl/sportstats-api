@@ -396,7 +396,16 @@ class LeaguesController extends BaseController {
     }
 
 
+    get_league_scrap_info(req, res){
+        LeaguesToScrap.find({}, function (err, dbLeaguesToScrap) {
+            if (err) {
+                logger.error(err);
+                return res.json(responseModel.errorResponse(err));
+            }
 
+            return res.json(responseModel.successResponse(dbLeaguesToScrap));
+        });
+    }
 
     /**
      * 

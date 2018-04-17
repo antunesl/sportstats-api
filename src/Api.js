@@ -89,6 +89,8 @@ mongoose.connect(mongoConnString, function (err) {
 
     //swaggerSpec.definitions.in_login = require("./docs/swagger/tags.yaml");
 
+    app.set('view engine', 'pug');
+
     // Serve swagger docs the way you like (Recommendation: swagger-tools)
     app.get('/api-docs.json', function (req, res) {
         res.setHeader('Content-Type', 'application/json');
@@ -191,6 +193,8 @@ mongoose.connect(mongoConnString, function (err) {
     countriesRoutes(app);
     var competitionRoutes = require('./Routes/CompetitionRoutes');
     competitionRoutes(app);
+    var managementRoutes = require('./Routes/ManagementRoutes');
+    managementRoutes(app);
 
     app.listen(port);
     logger.info('Sportstats API server started on: ' + port);

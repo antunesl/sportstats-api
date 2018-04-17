@@ -1,0 +1,21 @@
+html  
+ head
+   title Sportstats
+   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css')
+ 
+ body
+   .container
+     block content
+        .main.container
+            h2 Competições
+            hr
+            each variable in leagues
+                div.row
+                    div.col-md-10
+                        h3=variable.name
+                        h4=variable.permalink
+                        h5=variable.country
+                    div.col-md-2
+                        button.btn.btn-primary(type='button') Scraping
+                hr
