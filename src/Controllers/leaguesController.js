@@ -335,9 +335,9 @@ class LeaguesController extends BaseController {
                             .then(function (dbLeagues) {
 
                                 if (dbLeagues.length > 0) {
-                                    // Add 1 hour
+                                    // Add 2 hour
                                     var nextPreviewDate = new Date();
-                                    nextPreviewDate += (1 * 60 * 60 * 1000);
+                                    nextPreviewDate += (2 * 60 * 60 * 1000);
                                     dbLeagues[0].nextPreviewScrapAt = nextPreviewDate;
 
                                     logger.info("Added 1 hour: " + dbLeagues[0].nextPreviewScrapAt);
