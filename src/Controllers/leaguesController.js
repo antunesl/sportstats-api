@@ -228,6 +228,7 @@ class LeaguesController extends BaseController {
                                 });
                                 if (newArray.length > 0) {
                                     teamsToResults.push({
+                                        permalink: leagueTeam.permalink,
                                         name: newArray[0].whoTeamName,
                                         link: newArray[0].whoTeamLink,
                                     });
@@ -260,13 +261,6 @@ class LeaguesController extends BaseController {
                 logger.error(err);
                 return res.json(responseModel.errorResponse(err));
             });
-
-
-
-
-
-
-
     }
 
 
@@ -275,13 +269,10 @@ class LeaguesController extends BaseController {
         var previews = req.body.docs;
 
         const matchFields = ['permalink'];
-        logger.info(previews);
+        logger.info(JSON.stringify(previews));
 
         var ids = [];
-        previews.forEach(preview => {
-            ids.push(preview.home);
-
-        });
+        
 
         TeamInfo.find({
             permalink: {
