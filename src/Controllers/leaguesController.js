@@ -292,7 +292,7 @@ class LeaguesController extends BaseController {
             dbTeams.forEach(team => {
                 if (team.nextGame) {
                     var newArray = previews.filter(function (el) {
-                        return el.home == team.permalink;
+                        return el.permalink == team.permalink;
                     });
 
                     if (newArray.length > 0) {
