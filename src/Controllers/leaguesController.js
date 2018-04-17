@@ -337,7 +337,7 @@ class LeaguesController extends BaseController {
                                 if (dbLeagues.length > 0) {
                                     // Add 4 hours
                                     var nextPreviewDate = new Date();
-                                    nextPreviewDate += (4 * 60 * 60 * 1000);
+                                    nextPreviewDate += (1 * 24 * 60 * 60 * 1000);
                                     dbLeagues[0].nextPreviewScrapAt = nextPreviewDate;
 
                                     logger.info("Added 1 hour: " + dbLeagues[0].nextPreviewScrapAt);
@@ -347,7 +347,7 @@ class LeaguesController extends BaseController {
                                         if (err)
                                             return res.status(500).json(responseModel.errorResponse(err));
 
-                                        logger.info("»» Set the LeagueToScrap '" + league + "' NextPreviewScrapAt to " + nextPreviewDate);
+                                        logger.info("»» Set the LeagueToScrap '" + league + "' NextPreviewScrapAt to " + dbLeagues[0].nextPreviewScrapAt);
                                         return res.json(responseModel.successResponse());
                                     });
                                 }
