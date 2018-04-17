@@ -2,6 +2,7 @@ const BaseController = require('../Controllers/baseController')
 var logger = require('../Logger.js'),
     mongoose = require('mongoose'),
     LeagueInfo = mongoose.model('Leagues'),
+    TeamInfo = mongoose.model('Teams'),
     LeaguesToScrap = mongoose.model('LeaguesToScrap'),
     TeamsToScrap = mongoose.model('TeamsToScrap'),
     async = require('async'),
