@@ -337,17 +337,15 @@ class LeaguesController extends BaseController {
                                 if (dbLeagues.length > 0) {
                                     // Add 4 hours
                                     var nextPreviewDate = new Date();
-                                    nextPreviewDate += (1 * 24 * 60 * 60 * 1000);
+                                    nextPreviewDate.setHours(nextPreviewDate.getHours() + 1);
                                     dbLeagues[0].nextPreviewScrapAt = nextPreviewDate;
-
-                                    logger.info("Added 1 hour: " + dbLeagues[0].nextPreviewScrapAt);
 
                                     var upsertQuery = { name: league };
                                     LeaguesToScrap.findOneAndUpdate(upsertQuery, dbLeagues[0], { upsert: true }, function (err, doc) {
                                         if (err)
                                             return res.status(500).json(responseModel.errorResponse(err));
 
-                                        logger.info("»» Set the LeagueToScrap '" + league + "' NextPreviewScrapAt to " + dbLeagues[0].nextPreviewScrapAt);
+                                        logger.info("»» Set the LeagueToScrap '" + league + "' to " + JSON.stringify(dbLeagues[0]));
                                         return res.json(responseModel.successResponse());
                                     });
                                 }
