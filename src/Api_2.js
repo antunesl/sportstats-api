@@ -23,7 +23,7 @@ var logger = require('./Logger.js'),
     TeamInfo = require('./Models/TeamInfo'),
     LeagueToScrap = require('./Models/LeagueToScrap'),
     LeagueInfo = require('./Models/LeagueInfo'),
-    Country = require('./Models/Country'),
+    // Country = require('./Models/Country'),
     
     // CompetitionsScrapInfo = require('./Models/Scraping/CompetitionsScrapInfo'),
     // Competition = require('./Models/Competition'),
@@ -189,8 +189,8 @@ mongoose.connect(mongoConnString, function (err) {
     leagueRoutes(app);
     var teamRoutes = require('./Routes/TeamsRoutes');
     teamRoutes(app);
-    var countriesRoutes = require('./Routes/CountriesRoutes');
-    countriesRoutes(app);
+    // var countriesRoutes = require('./Routes/CountriesRoutes');
+    // countriesRoutes(app);
     // var competitionRoutes = require('./Routes/CompetitionRoutes');
     // competitionRoutes(app);
     var managementRoutes = require('./Routes/ManagementRoutes');
