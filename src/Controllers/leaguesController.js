@@ -310,7 +310,7 @@ class LeaguesController extends BaseController {
 
                     if (newArray.length > 0) {
                         team.nextGame = {
-                            previewLink= newArray[0].link
+                            previewLink: newArray[0].link
                         };
                         team.previewLink = newArray[0].link;
                         team.hasPreview = true;
