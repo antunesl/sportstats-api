@@ -171,13 +171,17 @@ class LeaguesController extends BaseController {
      */
     get_pending_league_games_to_scrap(req, res) {
 
+        var now = new Date();
+        var filter = {
+            nextGameScrapAt: { "$lte": now }
+        };
 
-        // scrapDictionary
-        LeaguesToScrap.paginate({}, { limit: 10 })
+        LeaguesToScrap.paginate(filter, { limit: 1 })
             .then(function (dbLeagues) {
 
                 var leagues = [];
                 var leagueNames = [];
+
                 dbLeagues.docs.forEach(league => {
                     if (!leagueNames.includes(league.name)) {
 
@@ -237,7 +241,11 @@ class LeaguesController extends BaseController {
                             });
                         });
 
-                        return res.json(responseModel.successResponse(results));
+                        // Só enviar uma liga!
+                        if (results.length > 0)
+                            return res.json(responseModel.successResponse(results[0]));
+                        else
+                            return res.json(responseModel.successResponse(results));
                     })
                     .catch(function (err) {
                         logger.error(err);
@@ -316,16 +324,47 @@ class LeaguesController extends BaseController {
             TeamsToScrap.find({ permalink: { $in: ids } })
                 .then(function (dbTeams) {
 
+                    var league = '';
                     dbTeams.forEach(element => {
+                        league = element.league;
                         element.hasPreview = true;
                         logger.info('Updating "hasPreview » true" for ' + element.name);
                     });
 
                     var result3 = TeamsToScrap.upsertMany(dbTeams, matchFields);
-
                     logger.info('Update result: ' + JSON.stringify(result3));
 
-                    return res.json(responseModel.successResponse());
+
+                    if (league) {
+                        LeaguesToScrap.find({ permalink: league })
+                            .then(function (dbLeagues) {
+
+                                if (dbLeagues.length > 0) {
+                                    // Add 1 hour
+                                    var nextPreviewDate = new Date();
+                                    nextPreviewDate += (1 * 60 * 60 * 1000);
+                                    dbLeagues[0].nextPreviewScrapAt = nextPreviewDate;
+
+                                    var upsertQuery = { permalink: league };
+                                    LeaguesToScrap.findOneAndUpdate(upsertQuery, dbLeagues[0], { upsert: true }, function (err, doc) {
+                                        if (err)
+                                            return res.status(500).json(responseModel.errorResponse(err));
+
+                                        logger.info("»» Set the LeagueToScrap '" + league + "' NextPreviewScrapAt to " + nextPreviewDate);
+
+                                        return res.json(responseModel.successResponse());
+                                    });
+                                }
+
+                                return res.json(responseModel.successResponse());
+                            })
+                            .catch(function (err) {
+                                logger.error(err);
+                                return res.status(500).json(responseModel.errorResponse(err));
+                            });
+                    }
+                    else
+                        return res.json(responseModel.successResponse());
                 })
                 .catch(function (err) {
                     logger.error(err);
