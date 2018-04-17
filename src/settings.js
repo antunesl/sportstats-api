@@ -26,7 +26,7 @@ var settings = {
         }
     },
     mongo: {
-        authEnabled: false,
+        authEnabled: true,
         connStringUserTag: '{user}',
         connStringPasswordTag: '{password}',
         connString: 'mongodb://{user}:{password}@localhost:27017/admin'
