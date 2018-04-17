@@ -37,8 +37,8 @@ var mongoConnString = `${settings.mongo.connString}`;
 if(settings.mongo.authEnabled)
 {
     // console.log(JSON.stringify(process.env));
-    // console.log(process.env.MONGO_USER);
-    // console.log(process.env.MONGO_PWD);
+    console.log(process.env.MONGO_USER);
+    console.log(process.env.MONGO_PWD);
     mongoConnString = mongoConnString.replace(settings.mongo.connStringUserTag, process.env.MONGO_USER);
     mongoConnString = mongoConnString.replace(settings.mongo.connStringPasswordTag, process.env.MONGO_PWD);
 }
@@ -47,7 +47,7 @@ mongoose.Promise = global.Promise;
 mongoose.plugin(upsertMany);
 
 
-logger.info("Checking MongoDb connection...");
+logger.info("Checking MongoDb connection..." + mongoConnString);
 mongoose.connect(mongoConnString, function (err) {
     if (err) {
         console.error(err);
@@ -189,8 +189,10 @@ mongoose.connect(mongoConnString, function (err) {
     teamRoutes(app);
     var countriesRoutes = require('./Routes/CountriesRoutes');
     countriesRoutes(app);
-    var competitionRoutes = require('./Routes/CompetitionRoutes');
-    competitionRoutes(app);
+    // var competitionRoutes = require('./Routes/CompetitionRoutes');
+    // competitionRoutes(app);
+    var managementRoutes = require('./Routes/ManagementRoutes');
+    managementRoutes(app);
 
     app.listen(port);
     logger.info('Sportstats API server started on: ' + port);
