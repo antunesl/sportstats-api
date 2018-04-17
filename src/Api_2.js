@@ -25,8 +25,8 @@ var logger = require('./Logger.js'),
     LeagueInfo = require('./Models/LeagueInfo'),
     Country = require('./Models/Country'),
     
-    CompetitionsScrapInfo = require('./Models/Scraping/CompetitionsScrapInfo'),
-    Competition = require('./Models/Competition'),
+    // CompetitionsScrapInfo = require('./Models/Scraping/CompetitionsScrapInfo'),
+    // Competition = require('./Models/Competition'),
     
     TeamScrapInfo = require('./Models/Scraping/TeamsScrapInfo');
 var autoIncrement = require('mongoose-auto-increment');
@@ -90,7 +90,7 @@ mongoose.connect(mongoConnString, function (err) {
     //swaggerSpec.definitions.in_login = require("./docs/swagger/tags.yaml");
 
     app.set('view engine', 'pug');
-    
+
     // Serve swagger docs the way you like (Recommendation: swagger-tools)
     app.get('/api-docs.json', function (req, res) {
         res.setHeader('Content-Type', 'application/json');

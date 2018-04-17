@@ -25,8 +25,8 @@ var logger = require('./Logger.js'),
     LeagueInfo = require('./Models/LeagueInfo'),
     Country = require('./Models/Country'),
     
-    CompetitionsScrapInfo = require('./Models/Scraping/CompetitionsScrapInfo'),
-    Competition = require('./Models/Competition'),
+    // CompetitionsScrapInfo = require('./Models/Scraping/CompetitionsScrapInfo'),
+    // Competition = require('./Models/Competition'),
     
     TeamScrapInfo = require('./Models/Scraping/TeamsScrapInfo');
 var autoIncrement = require('mongoose-auto-increment');
