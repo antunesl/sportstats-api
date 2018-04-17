@@ -272,7 +272,9 @@ class LeaguesController extends BaseController {
         logger.info(JSON.stringify(previews));
 
         var ids = [];
-        
+        previews.forEach(preview => {
+            ids.push(preview.permalink);
+        });
 
         TeamInfo.find({
             permalink: {
