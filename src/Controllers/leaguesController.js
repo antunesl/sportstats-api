@@ -340,18 +340,19 @@ class LeaguesController extends BaseController {
                                     nextPreviewDate += (1 * 60 * 60 * 1000);
                                     dbLeagues[0].nextPreviewScrapAt = nextPreviewDate;
 
-                                    var upsertQuery = { permalink: league };
+                                    logger.info("Added 1 hour: " + dbLeagues[0].nextPreviewScrapAt);
+
+                                    var upsertQuery = { name: league };
                                     LeaguesToScrap.findOneAndUpdate(upsertQuery, dbLeagues[0], { upsert: true }, function (err, doc) {
                                         if (err)
                                             return res.status(500).json(responseModel.errorResponse(err));
 
                                         logger.info("»» Set the LeagueToScrap '" + league + "' NextPreviewScrapAt to " + nextPreviewDate);
-
                                         return res.json(responseModel.successResponse());
                                     });
                                 }
-
-                                return res.json(responseModel.successResponse());
+                                else
+                                    return res.json(responseModel.successResponse());
                             })
                             .catch(function (err) {
                                 logger.error(err);
