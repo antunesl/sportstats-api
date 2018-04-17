@@ -328,11 +328,10 @@ class LeaguesController extends BaseController {
                     var result3 = TeamsToScrap.upsertMany(dbTeams, matchFields);
                     logger.info('Update result: ' + JSON.stringify(result3));
 
-
                     logger.info("» League: " + league);
 
                     if (league) {
-                        LeaguesToScrap.find({ permalink: league })
+                        LeaguesToScrap.find({ name: league })
                             .then(function (dbLeagues) {
 
                                 if (dbLeagues.length > 0) {
