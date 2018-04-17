@@ -72,9 +72,11 @@ module.exports = function (app) {
      *           type: object
      */
     app.route(`/${settings.api.apiBasePath}/${leaguesRoutePrefix}/scrap`)
-        .get(leaguesCtrl.get_league_scrap_info)
+        // .get(leaguesCtrl.get_league_scrap_info)
         .post(leaguesCtrl.save_league_scrap_info);
 
+    app.route(`/${settings.api.apiBasePath}/${leaguesRoutePrefix}/info/list`)
+        .get(leaguesCtrl.get_league_scrap_info)
 
     /**
      * @swagger

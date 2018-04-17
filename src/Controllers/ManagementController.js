@@ -22,7 +22,7 @@ class ManagementController extends BaseController {
     competitions(req, res) {
 
         request
-            .get('http://208.110.70.2:3010/api/leagues/scrap', {}, function (error, response, body) {
+            .get('http://208.110.70.2:3010/api/leagues/info/list', {}, function (error, response, body) {
                 
                 var jsonObject = JSON.parse(body);
 

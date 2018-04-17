@@ -26,11 +26,11 @@ var settings = {
         }
     },
     mongo: {
-        authEnabled: true,
+        authEnabled: false,
         connStringUserTag: '{user}',
         connStringPasswordTag: '{password}',
-        connString: 'mongodb://{user}:{password}@localhost:27017/admin'
-        //connString: 'mongodb://localhost:27017/sportstats'
+        // connString: 'mongodb://{user}:{password}@localhost:27017/admin'
+        connString: 'mongodb://localhost:27017/sportstats'
         // connString: 'mongodb://sportstatsdbAdmin:sportstatsWIG@server/sportstats'
     },
     scraping: {

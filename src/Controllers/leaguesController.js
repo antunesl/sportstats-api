@@ -397,11 +397,14 @@ class LeaguesController extends BaseController {
 
 
     get_league_scrap_info(req, res){
+        logger.info("asdasdasdad");
         LeaguesToScrap.find({}, function (err, dbLeaguesToScrap) {
             if (err) {
                 logger.error(err);
                 return res.json(responseModel.errorResponse(err));
             }
+
+            logger.info(dbLeaguesToScrap);
 
             return res.json(responseModel.successResponse(dbLeaguesToScrap));
         });
