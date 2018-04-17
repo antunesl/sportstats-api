@@ -290,7 +290,6 @@ class LeaguesController extends BaseController {
 
             var updateRows = [];
             dbTeams.forEach(team => {
-
                 if (team.nextGame) {
                     var newArray = previews.filter(function (el) {
                         return el.home == team.permalink;
@@ -304,6 +303,21 @@ class LeaguesController extends BaseController {
                         logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
                         updateRows.push(team);
                     }
+                } else {
+                    var newArray = previews.filter(function (el) {
+                        return el.home == team.permalink;
+                    });
+
+                    if (newArray.length > 0) {
+                        team.nextGame = {
+                            previewLink= newArray[0].link
+                        };
+                        team.previewLink = newArray[0].link;
+                        team.hasPreview = true;
+                        team.previewScrapDone = false;
+                        logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
+                        updateRows.push(team);
+                    }
                 }
             });
 
@@ -313,7 +327,7 @@ class LeaguesController extends BaseController {
             }
 
 
-            
+
 
             TeamsToScrap.find({ permalink: { $in: ids } })
                 .then(function (dbTeams) {
@@ -322,7 +336,7 @@ class LeaguesController extends BaseController {
                     dbTeams.forEach(element => {
                         league = element.league;
                         element.hasPreview = true;
-                        
+
                         logger.info('Updating "hasPreview » true" for ' + element.permalink);
                     });
 
