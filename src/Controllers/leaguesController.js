@@ -299,7 +299,7 @@ class LeaguesController extends BaseController {
                     if (newArray.length > 0) {
                         team.previewLink = newArray[0].link;
                         team.hasPreview = true;
-
+                        team.previewScrapDone = false;
                         team.nextGame.previewLink = newArray[0].link;
                         logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
                         updateRows.push(team);
@@ -313,7 +313,7 @@ class LeaguesController extends BaseController {
             }
 
 
-            logger.info('Going to search TeamsToScrap: ' + JSON.stringify(ids));
+            
 
             TeamsToScrap.find({ permalink: { $in: ids } })
                 .then(function (dbTeams) {
@@ -322,9 +322,11 @@ class LeaguesController extends BaseController {
                     dbTeams.forEach(element => {
                         league = element.league;
                         element.hasPreview = true;
-                        element.previewScrapDone = false;
-                        logger.info('Updating "hasPreview » true && previewScrapDone » false" for ' + element.name);
+                        
+                        logger.info('Updating "hasPreview » true" for ' + element.permalink);
                     });
+
+                    logger.info('Updating TeamsToScrap: ' + JSON.stringify(dbTeams));
 
                     var result3 = TeamsToScrap.upsertMany(dbTeams, matchFields);
                     logger.info('Update result: ' + JSON.stringify(result3));
