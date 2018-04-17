@@ -173,7 +173,7 @@ class LeaguesController extends BaseController {
 
         var now = new Date();
         var filter = {
-            nextGameScrapAt: { "$lte": now }
+            nextPreviewScrapAt: { "$lte": now }
         };
 
         LeaguesToScrap.paginate(filter, { limit: 1 })
