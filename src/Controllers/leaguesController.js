@@ -329,6 +329,8 @@ class LeaguesController extends BaseController {
                     logger.info('Update result: ' + JSON.stringify(result3));
 
 
+                    logger.info("» League: " + league);
+
                     if (league) {
                         LeaguesToScrap.find({ permalink: league })
                             .then(function (dbLeagues) {
