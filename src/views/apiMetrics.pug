@@ -8,10 +8,7 @@ block content
                 each stat in apiMetrics
                     div.panel.panel-primary
                         div.panel-heading
-                            if stat.method = 'GET'
-                                div.label.label-success #{stat.method} 
-                            else if stat.method = 'POST'
-                                div.label.label-danger #{stat.method} 
+                            div.label.label-success #{stat.method}
                         div.panel-body
                             h3=stat.key
                             hr
