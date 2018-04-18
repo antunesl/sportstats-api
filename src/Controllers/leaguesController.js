@@ -121,8 +121,19 @@ class LeaguesController extends BaseController {
      */
     reset_leagues_to_scrap(req, res) {
 
+        var permalink = req.params.permalink;
+
+        var filter = {
+            sport: 'football'
+        };
+
+        if(permalink)
+        {
+            filter.permalink = permalink;
+        }
+
         var now = new Date();
-        LeaguesToScrap.update({ sport: 'football' }, { nextScrapAt: now }, { multi: true },
+        LeaguesToScrap.update(filter, { nextScrapAt: now }, { multi: true },
             function (err, num) {
                 if (err) {
                     logger.error(err);
@@ -396,7 +407,7 @@ class LeaguesController extends BaseController {
     }
 
 
-    get_league_scrap_info(req, res){
+    get_league_scrap_info(req, res) {
         logger.info("asdasdasdad");
         LeaguesToScrap.find({}, function (err, dbLeaguesToScrap) {
             if (err) {

@@ -127,7 +127,7 @@ module.exports = function (app) {
      *         schema:
      *           type: object
      */
-    app.route(`/${settings.api.apiBasePath}/${leaguesRoutePrefix}/scrap/reset`)
+    app.route(`/${settings.api.apiBasePath}/${leaguesRoutePrefix}/scrap/reset/:permalink`)
         .post(leaguesCtrl.reset_leagues_to_scrap);
 
 

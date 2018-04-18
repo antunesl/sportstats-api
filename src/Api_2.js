@@ -89,6 +89,7 @@ mongoose.connect(mongoConnString, function (err) {
 
     //swaggerSpec.definitions.in_login = require("./docs/swagger/tags.yaml");
 
+    app.use('/public', express.static(__dirname + '/public'));
     app.set('view engine', 'pug');
 
     // Serve swagger docs the way you like (Recommendation: swagger-tools)

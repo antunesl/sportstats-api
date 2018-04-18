@@ -1,21 +1,28 @@
 html  
- head
-   title Sportstats
-   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css')
- 
- body
-   .container
-     block content
-        .main.container
-            h2 Competições
-            hr
-            each variable in leagues
-                div.row
-                    div.col-md-10
-                        h3=variable.name
-                        h4=variable.permalink
-                        h5=variable.country
-                    div.col-md-2
-                        button.btn.btn-primary(type='button') Scraping
-                hr
+    head
+        title Sportstats
+
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css')
+
+        script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
+        script(src='/public/js/main.js')
+
+    body
+        .container
+            block content
+                .main.container
+                    h2 Competições
+                    hr
+                    each variable in leagues
+                        div.row
+                            div.col-md-10
+                                h3=variable.name
+                                h4=variable.permalink
+                                h5=variable.country
+                                h5=variable.nextScrapAt
+                            div.col-md-2
+                                button.btn.btn-warning(type='button', onclick="resetScrapDate('" + variable.permalink + "')") Reset Next Scrap Date
+                        hr
+
