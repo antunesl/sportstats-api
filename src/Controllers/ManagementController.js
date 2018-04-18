@@ -79,7 +79,7 @@ class ManagementController extends BaseController {
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log(response) // Print the shortened url.
-                window.location.href = '/management/competitions';
+                res.redirect('/management/competitions');
             }
         });
     }
