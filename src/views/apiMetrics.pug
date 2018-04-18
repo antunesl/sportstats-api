@@ -1,0 +1,32 @@
+extends layout.pug
+
+block content
+    .container
+        block content
+            .main.container
+                h2 API Metrics
+                each stat in apiMetrics
+                    div.panel.panel-primary
+                        div.panel-heading
+                            if stat.method = 'GET'
+                                div.label.label-success #{stat.method} 
+                            else if stat.method = 'POST'
+                                div.label.label-danger #{stat.method} 
+                        div.panel-body
+                            h3=stat.key
+                            hr
+                            div.row
+                                div.col-md-6
+                                    dl
+                                        dt Count
+                                        dd #{stat.values.duration.count}
+                                        hr
+                                        dt Min 
+                                        dd #{stat.values.duration.min}ms
+                                div.col-md-6
+                                    dl
+                                        dt Max 
+                                        dd #{stat.values.duration.max}ms
+                                        hr
+                                        dt Avg 
+                                        dd #{stat.values.duration.mean}ms

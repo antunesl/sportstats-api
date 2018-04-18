@@ -23,6 +23,77 @@ class ManagementController extends BaseController {
         });
     }
 
+    api_docs(req, res) {
+        res.redirect('/docs');
+    }
+
+
+    api_metrics(req, res) {
+        var metricsUrl = 'http://localhost:3011/metrics';
+        request.get(metricsUrl, (error, response, body) => {
+            if (error) {
+                return res.send(error);
+            }
+            let json = JSON.parse(body);
+            var stats = [];
+            for (var prop in json) {
+                if (json.hasOwnProperty(prop)) {
+                    stats.push({ key: prop, stats: json[prop] });
+                }
+            }
+            var content = '<h1><a href="/">Sportstats API</a></h1><h2>Metrics</h2>';
+
+            var filteredStats = [];
+            stats.forEach(stat => {
+                if (stat.key.indexOf('/') == 0 && stat.key != '/metrics' && stat.key != '/') {
+                    if (stat.stats.get) {
+                        stat.method = 'GET';
+                        stat.values = stat.stats.get;
+                    }
+                    if (stat.stats.post) {
+                        stat.method = 'POST';
+                        stat.values = stat.stats.post;
+                    }
+
+                    if (stat.key.startsWith('/api/'))
+                        filteredStats.push(stat);
+                }
+            });
+
+
+            res.render('apiMetrics', { apiMetrics: filteredStats });
+
+            // stats.forEach(stat => {
+            //     if (stat.key.indexOf('/') == 0 && stat.key != '/metrics' && stat.key != '/') {
+
+            //         if (stat.stats.get) {
+            //             content += '<h3>[GET] ' + stat.key + '</h3>';
+            //             content += '<ul>';
+            //             content += '<li>count: ' + stat.stats.get.duration.count + '</li>';
+            //             content += '<li>min: ' + stat.stats.get.duration.min + '</li>';
+            //             content += '<li>max: ' + stat.stats.get.duration.max + '</li>';
+            //             content += '<li>avg: ' + stat.stats.get.duration.mean + '</li>';
+            //             content += '</ul>';
+            //         }
+
+            //         if (stat.stats.post) {
+            //             content += '<h3>[POST] ' + stat.key + '</h3>';
+            //             content += '<ul>';
+            //             content += '<li>count: ' + stat.stats.post.duration.count + '</li>';
+            //             content += '<li>min: ' + stat.stats.post.duration.min + '</li>';
+            //             content += '<li>max: ' + stat.stats.post.duration.max + '</li>';
+            //             content += '<li>avg: ' + stat.stats.post.duration.mean + '</li>';
+            //             content += '</ul>';
+            //         }
+
+            //         content += '<hr/>';
+            //     }
+            // });
+            // res.send(content);
+        });
+    }
+
+
     competitions(req, res) {
 
         request

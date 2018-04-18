@@ -9,8 +9,14 @@ module.exports = function (app) {
     app.route(`/management`)
         .get(managementCtrl.home);
 
+    app.route(`/management/api/docs`)
+        .get(managementCtrl.api_docs);
+
+    app.route(`/management/api/metrics`)
+        .get(managementCtrl.api_metrics);
+
     app.route(`/management/competitions`)
-        .get(managementCtrl.competitions)
+        .get(managementCtrl.competitions);
 
     app.route(`/management/competitions/create`)
         .get(managementCtrl.create_competition_get)
