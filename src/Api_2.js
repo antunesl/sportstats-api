@@ -169,14 +169,7 @@ mongoose.connect(mongoConnString, function (err) {
 
 
     app.get('/', function (req, res) {
-        var content = '<h1>Sportstats API</h1>';
-
-        content += '<ul>' +
-            '<li>' + '<a href="/docs">Documentation</a>' + '</li>' +
-            '<li>' + '<a href="/metrics">Metrics</a>' + '</li>' +
-            '</ul>' + '<br/>';
-
-        res.send(content);
+        res.redirect('/management');
     });
 
     // Routes
