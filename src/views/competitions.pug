@@ -1,28 +1,25 @@
-html  
-    head
-        title Sportstats
+extends layout.pug
 
-        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css')
-
-        script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
-        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
-        script(src='/public/js/main.js')
-
-    body
-        .container
-            block content
-                .main.container
-                    h2 Competições
-                    hr
-                    each variable in leagues
-                        div.row
-                            div.col-md-10
-                                h3=variable.name
-                                h4=variable.country
-                                h5=variable.permalink
+block content
+    .container
+        block content
+            .main.container
+                h2 Competitions
+                hr
+                each variable in leagues
+                    div.row.well
+                        div.col-md-6
+                            h3 #{variable.name} (#{variable.country})
+                            h4=variable.permalink
+                            h4 Providers
+                            ul
+                                each provider in variable.providers
+                                    li
+                                        a(href=provider.link) #{provider.name}
+                        div.col-md-6
+                            div.alert.alert-info.pull-right
+                                h4 Next Scrap Date
                                 h5=variable.nextScrapAt
-                            div.col-md-2
-                                button.btn.btn-warning(type='button', onclick="resetScrapDate('" + variable.permalink + "')") Reset Next Scrap Date
-                        hr
+                                button.btn.btn-primary(type='button', onclick="resetScrapDate('" + variable.permalink + "')") Reset Next Scrap Date
+                    hr
 

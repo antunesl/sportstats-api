@@ -1,19 +1,7 @@
-html  
- head
-   title Sportstats
-   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-   link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css')
- 
- body
+extends layout.pug
+
+block content
    .container
      block content
         .main.container
-            .row
-            .col-md-12
-                h1.display-4.m-b-2 SPORTSTATS
-                hr
-                a(href="/management/competitions") Competições
-                br
-                a(href="/management/competitions/create") Nova Competição
-                br
-                
+            
