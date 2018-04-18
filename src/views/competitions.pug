@@ -6,7 +6,7 @@ block content
             .main.container
                 h2 Competitions
                 div.pull-right
-                    a.label.label-success(href="/management/competitions/create") New
+                    button.btn.btn-primary(type='button', onclick="location.href='/management/competitions/create';") New
                 br
                 hr
                 each variable in leagues
