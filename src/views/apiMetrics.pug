@@ -8,7 +8,7 @@ block content
                 each stat in apiMetrics
                     div.panel.panel-primary
                         div.panel-heading
-                            div.label(class=stat.method === "post" ? "label-danger" : "label-success") #{stat.method}
+                            div.label(class=stat.method === "POST" ? "label-danger" : "label-success") #{stat.method}
                         div.panel-body
                             h3=stat.key
                             hr
