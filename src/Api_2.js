@@ -47,7 +47,7 @@ mongoose.Promise = global.Promise;
 mongoose.plugin(upsertMany);
 
 
-logger.info("Checking MongoDb connection..." + mongoConnString);
+logger.info("Checking MongoDb connection...");
 mongoose.connect(mongoConnString, function (err) {
     if (err) {
         console.error(err);
