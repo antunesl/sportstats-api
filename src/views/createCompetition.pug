@@ -41,4 +41,9 @@ html
                         label(for='gameTime') Game Time:
                         input#gameTime.form-control(type='number' name='gameTime')
 
+                    div.form-group
+                        label(for='providers') Providers:
+                        input#sofaScoreProvider.form-control(type='text', placeholder='SofaScore Link' name='sofaScoreProvider')
+                        input#whoScoredProvider.form-control(type='text', placeholder='WhoScored Link' name='whoScoredProvider')
+
                     button.btn.btn-primary(type='submit') Criar Nova Competição
