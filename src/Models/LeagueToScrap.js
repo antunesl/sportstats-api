@@ -5,7 +5,7 @@ var mongoosePaginate = require('mongoose-paginate');
 var upsertMany = require('@meanie/mongoose-upsert-many');
 
 var LeagueToScrap = new Schema({
-    
+
 
     sport: String,
 
@@ -17,6 +17,11 @@ var LeagueToScrap = new Schema({
 
     country: String,
 
+    type: {
+        type: String,
+        enum: ['Normal', 'Knockout', 'GroupsKnockout']
+    },
+
     providers: [
         {
             name: String,
@@ -24,7 +29,7 @@ var LeagueToScrap = new Schema({
         }
     ],
 
-    scrapedAt:{
+    scrapedAt: {
         type: Date
     },
 
@@ -39,7 +44,7 @@ var LeagueToScrap = new Schema({
         type: Date,
         default: Date.now
     },
-    
+
     updatedAt: {
         type: Date
     }

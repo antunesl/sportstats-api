@@ -1,0 +1,45 @@
+extends layout.pug
+
+block content
+   .container
+     block content
+        .main.container
+            .row
+            .col-md-6.col-md-offset-3
+                h1.display-4.m-b-2 Nova Competição
+                hr
+                form(method='POST' action='/management/competitions/create')
+
+                    div.form-group
+                        label(for='sport') Desporto:
+                        select#sport.form-control(name="sport")
+                          each variable in sports
+                            option(value=variable) #{variable}
+
+                    div.form-group
+                        label(for='country') País:
+                        select#country.form-control(name="country")
+                          each variable in countries
+                            option(value=variable) #{variable}
+
+                    div.form-group
+                        label(for='name') Nome:
+                        input#name.form-control(type='text', placeholder='' name='name')
+
+                    div.form-group
+                        label(for='type') Tipo:
+                        select#type.form-control(name="type")
+                          option(value='Normal') Normal
+                          option(value='Knockouts') Knockouts
+                          option(value='GroupsKnockouts') Groups & Knockouts
+
+                    div.form-group
+                        label(for='gameTime') Game Time:
+                        input#gameTime.form-control(type='number' name='gameTime')
+
+                    div.form-group
+                        label(for='providers') Providers:
+                        input#sofaScoreProvider.form-control(type='text', placeholder='SofaScore Link' name='sofaScoreProvider')
+                        input#whoScoredProvider.form-control(type='text', placeholder='WhoScored Link' name='whoScoredProvider')
+
+                    button.btn.btn-primary(type='submit') Criar Nova Competição

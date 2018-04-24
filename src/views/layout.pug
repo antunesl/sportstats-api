@@ -1,0 +1,42 @@
+//- layout.pug
+html
+  head
+    title Sportstats - #{title}
+    block scripts
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css')
+
+        script(src="https://code.jquery.com/jquery-2.2.4.js", integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=", crossorigin="anonymous")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS", crossorigin="anonymous")
+        script(src='/public/js/main.js')
+  body
+    nav.navbar.navbar-default
+      div.container-fluid
+        div.navbar-header
+          a.navbar-brand(href="/management") Sportstats
+
+          ul.nav.navbar-nav
+            li.dropdown
+              a.dropdown-toggle(href="#", data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") API <span class="caret"></span></a>
+              ul.dropdown-menu
+                li
+                  a(href="/docs") Documentation
+                li
+                  a(href="/management/api/metrics") Metrics
+            li.dropdown
+              a.dropdown-toggle(href="#", data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false") Competitions <span class="caret"></span></a>
+              ul.dropdown-menu
+                li
+                  a(href="/management/competitions") Competitions To Scrap
+                li
+                  a(href="/management/competitions/create") New Competition
+                  
+                  
+                  
+                
+          
+  
+    block content
+    block foot
+      #footer
+        

@@ -2,6 +2,7 @@ const BaseController = require('../Controllers/baseController')
 var logger = require('../Logger.js'),
     mongoose = require('mongoose'),
     LeagueInfo = mongoose.model('Leagues'),
+    TeamInfo = mongoose.model('Teams'),
     LeaguesToScrap = mongoose.model('LeaguesToScrap'),
     TeamsToScrap = mongoose.model('TeamsToScrap'),
     async = require('async'),
@@ -120,8 +121,19 @@ class LeaguesController extends BaseController {
      */
     reset_leagues_to_scrap(req, res) {
 
+        var permalink = req.params.permalink;
+
+        var filter = {
+            sport: 'football'
+        };
+
+        if(permalink)
+        {
+            filter.permalink = permalink;
+        }
+
         var now = new Date();
-        LeaguesToScrap.update({ sport: 'football' }, { nextScrapAt: now }, { multi: true },
+        LeaguesToScrap.update(filter, { nextScrapAt: now }, { multi: true },
             function (err, num) {
                 if (err) {
                     logger.error(err);
@@ -171,13 +183,17 @@ class LeaguesController extends BaseController {
      */
     get_pending_league_games_to_scrap(req, res) {
 
+        var now = new Date();
+        var filter = {
+            nextPreviewScrapAt: { "$lte": now }
+        };
 
-        // scrapDictionary
-        LeaguesToScrap.paginate({}, { limit: 10 })
+        LeaguesToScrap.paginate(filter, { limit: 1 })
             .then(function (dbLeagues) {
 
                 var leagues = [];
                 var leagueNames = [];
+
                 dbLeagues.docs.forEach(league => {
                     if (!leagueNames.includes(league.name)) {
 
@@ -223,6 +239,7 @@ class LeaguesController extends BaseController {
                                 });
                                 if (newArray.length > 0) {
                                     teamsToResults.push({
+                                        permalink: leagueTeam.permalink,
                                         name: newArray[0].whoTeamName,
                                         link: newArray[0].whoTeamLink,
                                     });
@@ -237,7 +254,11 @@ class LeaguesController extends BaseController {
                             });
                         });
 
-                        return res.json(responseModel.successResponse(results));
+                        // Só enviar uma liga!
+                        if (results.length > 0)
+                            return res.json(responseModel.successResponse(results[0]));
+                        else
+                            return res.json(responseModel.successResponse(results));
                     })
                     .catch(function (err) {
                         logger.error(err);
@@ -251,13 +272,6 @@ class LeaguesController extends BaseController {
                 logger.error(err);
                 return res.json(responseModel.errorResponse(err));
             });
-
-
-
-
-
-
-
     }
 
 
@@ -266,12 +280,11 @@ class LeaguesController extends BaseController {
         var previews = req.body.docs;
 
         const matchFields = ['permalink'];
-        logger.info(previews);
+        logger.info(JSON.stringify(previews));
 
         var ids = [];
         previews.forEach(preview => {
-            ids.push(preview.home);
-
+            ids.push(preview.permalink);
         });
 
         TeamInfo.find({
@@ -288,17 +301,31 @@ class LeaguesController extends BaseController {
 
             var updateRows = [];
             dbTeams.forEach(team => {
-
                 if (team.nextGame) {
                     var newArray = previews.filter(function (el) {
-                        return el.home == team.permalink;
+                        return el.permalink == team.permalink;
                     });
 
                     if (newArray.length > 0) {
                         team.previewLink = newArray[0].link;
                         team.hasPreview = true;
-
+                        team.previewScrapDone = false;
                         team.nextGame.previewLink = newArray[0].link;
+                        logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
+                        updateRows.push(team);
+                    }
+                } else {
+                    var newArray = previews.filter(function (el) {
+                        return el.home == team.permalink;
+                    });
+
+                    if (newArray.length > 0) {
+                        team.nextGame = {
+                            previewLink: newArray[0].link
+                        };
+                        team.previewLink = newArray[0].link;
+                        team.hasPreview = true;
+                        team.previewScrapDone = false;
                         logger.info(' » Preview link for "' + team.name + '": ' + team.nextGame.previewLink);
                         updateRows.push(team);
                     }
@@ -311,21 +338,54 @@ class LeaguesController extends BaseController {
             }
 
 
-            logger.info('Going to search TeamsToScrap: ' + JSON.stringify(ids));
+
 
             TeamsToScrap.find({ permalink: { $in: ids } })
                 .then(function (dbTeams) {
 
+                    var league = '';
                     dbTeams.forEach(element => {
+                        league = element.league;
                         element.hasPreview = true;
-                        logger.info('Updating "hasPreview » true" for ' + element.name);
+
+                        logger.info('Updating "hasPreview » true" for ' + element.permalink);
                     });
 
+                    logger.info('Updating TeamsToScrap: ' + JSON.stringify(dbTeams));
+
                     var result3 = TeamsToScrap.upsertMany(dbTeams, matchFields);
-
                     logger.info('Update result: ' + JSON.stringify(result3));
+                    logger.info("» League: " + league);
 
-                    return res.json(responseModel.successResponse());
+                    if (league) {
+                        LeaguesToScrap.find({ name: league })
+                            .then(function (dbLeagues) {
+
+                                if (dbLeagues.length > 0) {
+                                    // Add 4 hours
+                                    var nextPreviewDate = new Date();
+                                    nextPreviewDate.setHours(nextPreviewDate.getHours() + 1);
+                                    dbLeagues[0].nextPreviewScrapAt = nextPreviewDate;
+
+                                    var upsertQuery = { name: league };
+                                    LeaguesToScrap.findOneAndUpdate(upsertQuery, dbLeagues[0], { upsert: true }, function (err, doc) {
+                                        if (err)
+                                            return res.status(500).json(responseModel.errorResponse(err));
+
+                                        logger.info("»» Set the LeagueToScrap '" + league + "' to " + JSON.stringify(dbLeagues[0]));
+                                        return res.json(responseModel.successResponse());
+                                    });
+                                }
+                                else
+                                    return res.json(responseModel.successResponse());
+                            })
+                            .catch(function (err) {
+                                logger.error(err);
+                                return res.status(500).json(responseModel.errorResponse(err));
+                            });
+                    }
+                    else
+                        return res.json(responseModel.successResponse());
                 })
                 .catch(function (err) {
                     logger.error(err);
@@ -347,7 +407,19 @@ class LeaguesController extends BaseController {
     }
 
 
+    get_league_scrap_info(req, res) {
+        logger.info("asdasdasdad");
+        LeaguesToScrap.find({}, function (err, dbLeaguesToScrap) {
+            if (err) {
+                logger.error(err);
+                return res.json(responseModel.errorResponse(err));
+            }
 
+            logger.info(dbLeaguesToScrap);
+
+            return res.json(responseModel.successResponse(dbLeaguesToScrap));
+        });
+    }
 
     /**
      * 

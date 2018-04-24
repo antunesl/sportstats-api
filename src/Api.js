@@ -25,8 +25,8 @@ var logger = require('./Logger.js'),
     LeagueInfo = require('./Models/LeagueInfo'),
     Country = require('./Models/Country'),
     
-    CompetitionsScrapInfo = require('./Models/Scraping/CompetitionsScrapInfo'),
-    Competition = require('./Models/Competition'),
+    // CompetitionsScrapInfo = require('./Models/Scraping/CompetitionsScrapInfo'),
+    // Competition = require('./Models/Competition'),
     
     TeamScrapInfo = require('./Models/Scraping/TeamsScrapInfo');
 var autoIncrement = require('mongoose-auto-increment');
@@ -36,7 +36,7 @@ var autoIncrement = require('mongoose-auto-increment');
 var mongoConnString = `${settings.mongo.connString}`;
 if(settings.mongo.authEnabled)
 {
-    console.log(JSON.stringify(process.env));
+    // console.log(JSON.stringify(process.env));
     console.log(process.env.MONGO_USER);
     console.log(process.env.MONGO_PWD);
     mongoConnString = mongoConnString.replace(settings.mongo.connStringUserTag, process.env.MONGO_USER);
@@ -88,6 +88,9 @@ mongoose.connect(mongoConnString, function (err) {
     var swaggerSpec = swaggerJSDoc(options);
 
     //swaggerSpec.definitions.in_login = require("./docs/swagger/tags.yaml");
+
+    app.use('/public', express.static(__dirname + '/public'));
+    app.set('view engine', 'pug');
 
     // Serve swagger docs the way you like (Recommendation: swagger-tools)
     app.get('/api-docs.json', function (req, res) {
@@ -189,8 +192,10 @@ mongoose.connect(mongoConnString, function (err) {
     teamRoutes(app);
     var countriesRoutes = require('./Routes/CountriesRoutes');
     countriesRoutes(app);
-    var competitionRoutes = require('./Routes/CompetitionRoutes');
-    competitionRoutes(app);
+    // var competitionRoutes = require('./Routes/CompetitionRoutes');
+    // competitionRoutes(app);
+    var managementRoutes = require('./Routes/ManagementRoutes');
+    managementRoutes(app);
 
     app.listen(port);
     logger.info('Sportstats API server started on: ' + port);

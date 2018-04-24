@@ -2,9 +2,9 @@
 const BaseController = require('../Controllers/baseController');
 var logger = require('../Logger.js'),
     mongoose = require('mongoose'),
-    CompetitionScrapInfo = mongoose.model('CompetitionScrapInfo'),
+    // CompetitionScrapInfo = mongoose.model('CompetitionScrapInfo'),
     TeamScrapInfo = mongoose.model('TeamScrapInfo'),
-    Competition = mongoose.model('Competitions'),
+    // Competition = mongoose.model('Competitions'),
     async = require('async'),
     response = require('./Response.js');
 

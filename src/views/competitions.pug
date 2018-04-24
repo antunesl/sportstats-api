@@ -1,0 +1,28 @@
+extends layout.pug
+
+block content
+    .container
+        block content
+            .main.container
+                h2 Competitions
+                div.pull-right
+                    button.btn.btn-success(type='button', onclick="location.href='/management/competitions/create';") New
+                br
+                hr
+                each variable in leagues
+                    div.row.well
+                        div.col-md-6
+                            h3 #{variable.name} (#{variable.country})
+                            h4=variable.permalink
+                            h4 Providers
+                            ul
+                                each provider in variable.providers
+                                    li
+                                        a(href=provider.link) #{provider.name}
+                        div.col-md-6
+                            div.alert.alert-info.pull-right
+                                h4 Next Scrap Date
+                                h5=variable.nextScrapAt
+                                button.btn.btn-primary(type='button', onclick="resetScrapDate('" + variable.permalink + "')") Reset Next Scrap Date
+                    hr
+
