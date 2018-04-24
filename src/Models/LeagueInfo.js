@@ -25,7 +25,29 @@ var LeagueInfo = new Schema({
     titleHolder: String,
 
     mostTitlesNumber: Number,
-
+    knockoutStage: [{
+        awayTeam: String,
+        homeTeam: String,
+        order: Number,
+        winAwayTeam: Boolean,
+        winHomeTeam: Boolean
+    }],
+    groupStage: [{
+        groupName: String,
+        groupTeams: [{
+            defeateds: Number,
+            draws: Number,
+            gamesPlayed: Number,
+            goalConceded: Number,
+            goalScored: Number,
+            lastResults: [],
+            points: Number,
+            position: Number,
+            teamLink: String,
+            teamName: String,
+            wins: Number
+        }]
+    }],
     topScores: [{
         goals: Number,
         matches: Number,
@@ -66,13 +88,13 @@ var LeagueInfo = new Schema({
         type: Date,
         default: Date.now
     },
-    
+
     updatedAt: {
         type: Date
     }
 }, {
-    collection: 'Leagues'
-});
+        collection: 'Leagues'
+    });
 LeagueInfo.plugin(mongoosePaginate);
 LeagueInfo.plugin(upsertMany);
 module.exports = mongoose.model('Leagues', LeagueInfo, 'Leagues');
