@@ -535,10 +535,10 @@ class LeaguesController extends BaseController {
                                 newTeamToScrap.name = team.teamName;
                                 newTeamToScrap.providers = [];
 
-                                if (standing.providerInfo)
+                                if (team.providerInfo)
                                     newTeamToScrap.providers.push({
-                                        name: standing.providerInfo.name,
-                                        link: standing.providerInfo.link,
+                                        name: team.providerInfo.name,
+                                        link: team.providerInfo.link,
                                     });
 
                                 leagueTeams.push({
